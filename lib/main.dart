@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: navigatorKey,
       routes: {
         'login': ( _ ) => const LoginScreen(),
+        'home':( _ ) => const RoutesApp() 
       },
       //theme: ThemeData.light().copyWith(
         //scaffoldBackgroundColor: Colors.white

@@ -33,8 +33,9 @@ class LoginScreen extends StatelessWidget {
             )),
             const SizedBox(height: 30),
             TextButton(
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, 'register'),
+              onPressed: () {
+                print("se presiono olvide contraseña");
+              },
               style: ButtonStyle(
                       overlayColor: MaterialStateProperty.all(const Color.fromRGBO(7, 67, 83, 0.9)),
                       shape: MaterialStateProperty.all(const StadiumBorder())
@@ -114,20 +115,8 @@ class _LoginForm extends StatelessWidget {
                     ? null
                     : () async {
                         //TODO: login form
-                        FocusScope.of(context).unfocus();
-                        //final authService = Provider.of<AuthService>(context, listen: false);
-                        if (!LoginForm.isValidForm()) return;
-                        LoginForm.isLoading = true;
-                        // final String? errorMessage =  await authService.login(LoginForm.email,LoginForm.password);
-                        final String? errorMessage = null;
-                        if (errorMessage == null) {
-                          Navigator.pushReplacementNamed(context, 'home');
-                        } else {
-                          print(errorMessage);
-                          NotificationsService.showSnackBar(errorMessage);
-                          await Future.delayed(Duration(seconds: 2));
-                          LoginForm.isLoading = false;
-                        }
+                        print("entrando");
+                        Navigator.pushReplacementNamed(context, 'home');
                       },
               )
             ],
