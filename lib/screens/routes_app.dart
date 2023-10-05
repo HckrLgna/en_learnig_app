@@ -13,10 +13,10 @@ class RoutesApp extends StatefulWidget {
 class _RoutesAppState extends State<RoutesApp> {
   int indexTap = 0;
   final List<TabItem> tabItems = List.of([
-    new TabItem(Icons.home, "Home", Colors.blue, labelStyle: TextStyle(fontWeight: FontWeight.normal)),
-    new TabItem(Icons.search, "Search", Colors.orange, labelStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-    new TabItem(Icons.layers, "Reports", Colors.red),
-    new TabItem(Icons.notifications, "Notifications", Colors.cyan),
+     TabItem(Icons.home, "Home", Colors.blue, labelStyle: TextStyle(fontWeight: FontWeight.normal)),
+     TabItem(Icons.search, "Search", Colors.orange, labelStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+     TabItem(Icons.layers, "Reports", Colors.red),
+     TabItem(Icons.notifications, "Notifications", Colors.cyan),
   ]);
   final List<Widget> widgetsChildren = [
     const HomeScreen(),

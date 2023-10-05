@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "428183455263",
+    "project_id": "cbatalk-39749",
+    "storage_bucket": "cbatalk-39749.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428183455263:android:f30179d62ec6fe32c9372a",
+        "android_client_info": {
+          "package_name": "com.solution.en_learn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCeOATzhxAiLbFgV3OeZsIMU6c-FIcpNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
