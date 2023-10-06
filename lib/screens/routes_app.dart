@@ -13,7 +13,7 @@ class RoutesApp extends StatefulWidget {
 }
 
 class _RoutesAppState extends State<RoutesApp> {
-  int indexTap = 0;
+  int indexTap = 1;
   final List<TabItem> tabItems = List.of([
     TabItem(Icons.home, "Home", Colors.grey,
         labelStyle: TextStyle(fontWeight: FontWeight.normal)),

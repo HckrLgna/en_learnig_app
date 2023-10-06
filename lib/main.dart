@@ -1,3 +1,4 @@
+import 'package:en_learn/screens/ai_translate_screen.dart';
 import 'package:en_learn/screens/screens.dart';
 import 'package:en_learn/services/services.dart';
 import 'package:flutter/material.dart';
@@ -35,12 +36,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "CbaTalk",
-      initialRoute: 'home',
+      initialRoute: 'ai_translate',
       navigatorKey: navigatorKey,
       routes: {
         'check_auth_screen': ( _ ) => const CheckAuthScreen(),
         'login': ( _ ) => const LoginScreen(),
-        'home':( _ ) => const RoutesApp() 
+        'home':( _ ) => const RoutesApp() ,
+        'ai_translate':(_) => const AiTranslateScreen() 
       },
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.white,
