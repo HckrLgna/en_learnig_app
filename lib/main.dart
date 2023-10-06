@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "CbaTalk",
-      initialRoute: 'check_auth_screen',
+      initialRoute: 'home',
       navigatorKey: navigatorKey,
       routes: {
         'check_auth_screen': ( _ ) => const CheckAuthScreen(),
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       },
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: Color.fromRGBO(102, 192, 100, 1),
+        primaryColor: const Color.fromRGBO(102, 192, 100, 1),
       ),
     );
   }

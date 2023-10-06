@@ -1,4 +1,6 @@
+import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,17 +8,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {}, 
-          icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(0, 102, 129, 1), weight: 10),
-          ),
-        title: Text("Home", style: TextStyle( color: Color.fromRGBO(33, 33, 33, 0.8), fontSize: 20, fontWeight: FontWeight.bold),),
-        centerTitle: true,
-      ),
+      appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(60),
+          child: AppBarCustomize(title: 'Home')),
       body: Container(
-        color: Colors.white,
+        color: Colors.black12,
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        
+        onPressed: () {
+        
+        },
       ),
     );
   }
