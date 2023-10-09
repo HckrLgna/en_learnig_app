@@ -8,7 +8,10 @@ class AppBarCustomize extends StatelessWidget {
     return AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () {}, 
+          onPressed: () {
+            Navigator.pop(context);
+            print("vuelta");
+          }, 
           icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(0, 102, 129, 1), weight: 10),
           ),
         title: Text(title, style: TextStyle( color: Color.fromRGBO(33, 33, 33, 0.8), fontSize: 20, fontWeight: FontWeight.bold),),

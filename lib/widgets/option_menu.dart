@@ -6,33 +6,28 @@ class OptionMenu extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print('Se presiono ');
-      },
-      child: Column(
-        children:<Widget> [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Icon(Icons.access_time,color: Colors.amber),
-              Container(
-                width: 90,
-                height: 90,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: color
-                ),
+    return Column(
+      children:<Widget> [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Icon(Icons.access_time,color: Colors.amber),
+            Container(
+              width: 90,
+              height: 90,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: color
               ),
-            ],
             ),
-          const SizedBox(height: 8,),
-          SizedBox(
-            width: 100,
-            child: Text(title,textAlign: TextAlign.center,)
-            )
-        ],
-      ),
+          ],
+          ),
+        const SizedBox(height: 8,),
+        SizedBox(
+          width: 100,
+          child: Text(title,textAlign: TextAlign.center,)
+          )
+      ],
     );
   }
 }

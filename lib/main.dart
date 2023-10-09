@@ -1,3 +1,5 @@
+import 'package:en_learn/screens/ai_menu_tools_screen.dart';
+import 'package:en_learn/screens/ai_tools_screen.dart';
 import 'package:en_learn/screens/ai_translate_screen.dart';
 import 'package:en_learn/screens/screens.dart';
 import 'package:en_learn/services/services.dart';
@@ -36,13 +38,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "CbaTalk",
-      initialRoute: 'ai_translate',
+      initialRoute: 'home',
       navigatorKey: navigatorKey,
       routes: {
         'check_auth_screen': ( _ ) => const CheckAuthScreen(),
         'login': ( _ ) => const LoginScreen(),
         'home':( _ ) => const RoutesApp() ,
-        'ai_translate':(_) => const AiTranslateScreen() 
+        'ai_menu':(_) => const AiToolsMenuScreen(),
+
+        'ai_translate': (_) => const AiToolsScreen()
       },
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.white,

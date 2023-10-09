@@ -7,8 +7,8 @@ class AiTranslateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Icon(Icons.circle),
-        SizedBox(
+        const Icon(Icons.circle),
+        const SizedBox(
           child: Text("Respuesta"),
         ),
         Container(
@@ -17,7 +17,7 @@ class AiTranslateScreen extends StatelessWidget {
           color: Color.fromRGBO(68, 70, 84, 1),
           child: Text("data", style: TextStyle(color: Colors.white),),
         ),
-        SizedBox(
+        const SizedBox(
           child: Text("Ingrese la frase o palabra a interpreta"),
           
         )
