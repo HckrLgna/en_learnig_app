@@ -14,17 +14,19 @@ class RoutesApp extends StatefulWidget {
 }
 
 class _RoutesAppState extends State<RoutesApp> {
-  int indexTap = 1;
+  int indexTap = 0;
   final List<TabItem> tabItems = List.of([
     TabItem(Icons.home, "Home", Colors.grey,
-        labelStyle: TextStyle(fontWeight: FontWeight.normal)),
+        labelStyle: const TextStyle(fontWeight: FontWeight.normal)),
     TabItem(Icons.search, "Questioner", Colors.grey,
         labelStyle:
             const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
     TabItem(Icons.account_circle, "Account", Colors.grey),
   ]);
+  
   final List<Widget> widgetsChildren = [
     const HomeScreen(),
+    const AiToolsScreen(),
     const AiToolsScreen()
   ];
   void onTapTapped(int index) {
@@ -36,8 +38,7 @@ class _RoutesAppState extends State<RoutesApp> {
 
   @override
   Widget build(BuildContext context) {
-    CircularBottomNavigationController _navigationController =
-        CircularBottomNavigationController(indexTap);
+    CircularBottomNavigationController _navigationController = CircularBottomNavigationController(indexTap);
     return Scaffold(
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
@@ -47,8 +48,9 @@ class _RoutesAppState extends State<RoutesApp> {
           tabItems,
           controller: _navigationController,
           selectedCallback: (selectedPos) {
-            onTapTapped(selectedPos!);
-             
+            setState(() {
+              _navigationController.value = selectedPos;
+            });
           },
         ),
       ),

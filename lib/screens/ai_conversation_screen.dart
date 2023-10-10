@@ -38,7 +38,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     speechToText = SpeechToText();
 
     flutterTts = FlutterTts();
-    
+    _messages.add(const ChatMessage(text: "Hello, I'm CbaTalk.", name: "CbaTalk", type:false));
 
     // Initialize speech recognition services, returns true if successful, false if failed.
 
@@ -56,7 +56,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     dialogflow = DialogflowGrpcV2Beta1.viaServiceAccount(serviceAccount);
     setState(() {});
 
-    print(res);
+    //speak("Hello, I'm C b a Talk.");
   }
   void stopStream() async {
     await _audioStreamSubscription.cancel();
@@ -80,11 +80,11 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
     // getting meaningful response text
     String fulfillmentText = data.queryResult.fulfillmentText;
-    print(fulfillmentText);
+    //print(fulfillmentText);
     if (fulfillmentText.isNotEmpty) {
       ChatMessage botMessage = ChatMessage(
         text: fulfillmentText,
-        name: "Talk",
+        name: "CbaTalk",
         type: false,
       );
       speak(fulfillmentText);
@@ -139,41 +139,53 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Column(
         children: [
           Flexible(
             child: Container(
-              height: 450,
-              decoration: const BoxDecoration(
-                  color: Color.fromRGBO(217, 217, 217, 0.3),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              height: 500,
+              decoration: BoxDecoration(
+                  border: Border.all(color: const Color.fromRGBO(217, 217, 217, 1)),
+                  color: const Color.fromRGBO(217, 217, 217, 0.3),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: ListView.builder(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   reverse: true,
-                  itemBuilder: (_, index) => _messages[index],
+                  itemBuilder: (_, index) => GestureDetector(
+                    onTap: () {
+                      print("se selecciono $index");
+                    },
+                    child: _messages[index],
+                  ),
                   itemCount: _messages.length),
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           Container(
             padding: const EdgeInsets.all(8),
+            //width: MediaQuery.sizeOf(context).width,
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              border: Border.all(color: Colors.blue),
-              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: const Color.fromRGBO(217, 217, 217, 1)),
+              borderRadius: BorderRadius.circular(30),
             ),
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            //margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: Row(
               children: <Widget>[
                 Flexible(
-                  child: TextField(
-                    controller: _textController,
-                    onSubmitted: handleSubmitted,
-                    decoration: const InputDecoration.collapsed(
-                        hintText: "Listening"),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextField(
+                      enabled: false,
+                      controller: _textController,
+                      onSubmitted: handleSubmitted,
+                      decoration: const InputDecoration.collapsed(
+                              
+                          hintText: "Listening"),
+                    ),
                   ),
                 ),
                 Container(
@@ -183,12 +195,25 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                     onPressed: () => handleSubmitted(_textController.text),
                   ),
                 ),
-                IconButton(
-                    iconSize: 30.0,
-                    icon: Icon(_isRecording ? Icons.mic : Icons.mic_off),
-                    onPressed: () {
-                      handleStream();
-                    }),
+                Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromRGBO(217, 217, 217, 1)
+                  ),
+                  child: IconButton(
+                      iconSize: 30.0,
+                      icon: Icon(_isRecording ? Icons.mic_outlined :Icons.mic_off_outlined),
+                      onPressed: () {
+                        if ( _isRecording ){
+                          setState(() {
+                            _stopListening();
+                          });
+                        }else{
+                           handleStream();
+                        }
+                       
+                      }),
+                ),
               ],
             ),
           ),

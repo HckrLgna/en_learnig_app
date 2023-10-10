@@ -12,15 +12,9 @@ class HomeScreen extends StatelessWidget {
           preferredSize: Size.fromHeight(60),
           child: AppBarCustomize(title: 'Home')),
       body: Container(
-        color: Colors.black12,
+         
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        
-        onPressed: () {
-        
-        },
-      ),
+       
     );
   }
 }

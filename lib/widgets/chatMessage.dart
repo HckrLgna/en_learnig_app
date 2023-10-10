@@ -14,25 +14,37 @@ class ChatMessage extends StatelessWidget {
 
   List<Widget> otherMessage(context) {
     return <Widget>[
+      
       Container(
-        margin: const EdgeInsets.only(right: 16.0),
-        child: const CircleAvatar(child: Text('B')),
+        margin: const EdgeInsets.only(right: 10.0),
+        child: const CircleAvatar(
+          backgroundImage: AssetImage('assets/ChatBoot.png'),
+          radius: 35,          
+          ),
       ),
       Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              name ?? "",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(30),
+            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                name ?? "",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5.0),
-              child: Text(text ?? ""),
-            ),
-          ],
+              Container(
+                margin: const EdgeInsets.only(top: 5.0),
+                child: Text(text ?? ""),
+              ),
+            ],
+          ),
         ),
       ),
     ];
