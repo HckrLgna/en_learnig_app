@@ -2,6 +2,7 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:en_learn/screens/ai_menu_tools_screen.dart';
 import 'package:en_learn/screens/ai_tools_screen.dart';
+import 'package:en_learn/screens/profile_screen.dart';
 import 'package:en_learn/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -14,45 +15,47 @@ class RoutesApp extends StatefulWidget {
 }
 
 class _RoutesAppState extends State<RoutesApp> {
-  int indexTap = 0;
-  final List<TabItem> tabItems = List.of([
-    TabItem(Icons.home, "Home", Colors.grey,
-        labelStyle: const TextStyle(fontWeight: FontWeight.normal)),
-    TabItem(Icons.search, "Questioner", Colors.grey,
-        labelStyle:
-            const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-    TabItem(Icons.account_circle, "Account", Colors.grey),
-  ]);
-  
-  final List<Widget> widgetsChildren = [
-    const HomeScreen(),
-    const AiToolsScreen(),
-    const AiToolsScreen()
+  int indexTap=0;
+  final List<Widget> widgetsChildern = [
+      HomeScreen(),
+      AiToolsScreen(),
+      ProfileScreen()
+      
   ];
-  void onTapTapped(int index) {
+  void onTapTapped(int index){
     setState(() {
-      indexTap = index;
-      print(indexTap);
+      indexTap=index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    CircularBottomNavigationController _navigationController = CircularBottomNavigationController(indexTap);
     return Scaffold(
-      body: widgetsChildren[indexTap],
+      body: widgetsChildern[indexTap],
       bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(canvasColor: Colors.indigo, primaryColor: Colors.purple),
-        child: CircularBottomNavigation(
-          tabItems,
-          controller: _navigationController,
-          selectedCallback: (selectedPos) {
-            setState(() {
-              _navigationController.value = selectedPos;
-            });
-          },
+        data: Theme.of(context).copyWith(
+          
+          canvasColor: Colors.white,
+          primaryColor: Colors.purple
         ),
+        child: BottomNavigationBar(
+          currentIndex: indexTap,
+          onTap: onTapTapped,
+          items:  const [
+              BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home'
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'AiTools'
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.image_search),
+                label: 'Profile'
+              ),
+               
+          ]
+          ),        
       ),
     );
   }

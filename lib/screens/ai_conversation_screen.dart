@@ -22,8 +22,8 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   bool _isRecording = false;
   
   late SpeechToText speechToText;
-  late StreamSubscription _recorderStatus;
-  late StreamSubscription<List<int>> _audioStreamSubscription;
+  //late StreamSubscription _recorderStatus;
+  //late StreamSubscription<List<int>> _audioStreamSubscription;
   late DialogflowGrpcV2Beta1 dialogflow;
 
   late FlutterTts flutterTts;
@@ -36,7 +36,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   Future<void> initPlugin() async {
     // initializing speech t otext plugin
     speechToText = SpeechToText();
-
+    
     flutterTts = FlutterTts();
     _messages.add(const ChatMessage(text: "Hello, I'm CbaTalk.", name: "CbaTalk", type:false));
 
@@ -56,10 +56,11 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     dialogflow = DialogflowGrpcV2Beta1.viaServiceAccount(serviceAccount);
     setState(() {});
 
+    print(res);
     //speak("Hello, I'm C b a Talk.");
   }
   void stopStream() async {
-    await _audioStreamSubscription.cancel();
+    //await _audioStreamSubscription.cancel();
   }
 
   void handleSubmitted(text) async {
@@ -130,8 +131,8 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
   @override
   void dispose() {
-    _recorderStatus.cancel();
-    _audioStreamSubscription.cancel();
+    //_recorderStatus.cancel();
+    //_audioStreamSubscription.cancel();
     speechToText.stop();
     super.dispose();
   }
