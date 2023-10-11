@@ -46,11 +46,11 @@ class _RoutesAppState extends State<RoutesApp> {
               label: 'home'
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search),
+                icon: Icon(Icons.smart_toy_outlined),
                 label: 'AiTools'
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.image_search),
+                icon: Icon(Icons.person_sharp),
                 label: 'Profile'
               ),
                

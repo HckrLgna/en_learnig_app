@@ -1,10 +1,11 @@
 import 'package:en_learn/screens/ai_menu_tools_screen.dart';
 import 'package:en_learn/screens/ai_tools_screen.dart';
-import 'package:en_learn/screens/ai_translate_screen.dart';
+
 import 'package:en_learn/screens/screens.dart';
 import 'package:en_learn/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const AppState());
@@ -17,11 +18,9 @@ class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: ( _ ) => AuthService() )
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => AuthService())],
       child: const MyApp(),
-      );
+    );
   }
 }
 
@@ -33,7 +32,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>(); 
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,16 +41,16 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'home',
       navigatorKey: navigatorKey,
       routes: {
-        'check_auth_screen': ( _ ) => const CheckAuthScreen(),
-        'login': ( _ ) => const LoginScreen(),
-        'home':( _ ) => const RoutesApp() ,
-        'ai_menu':(_) => const AiToolsMenuScreen(),
-
+        'check_auth_screen': (_) => const CheckAuthScreen(),
+        'login': (_) => const LoginScreen(),
+        'home': (_) => const RoutesApp(),
+        'ai_menu': (_) => const AiToolsMenuScreen(),
         'ai_translate': (_) => const AiToolsScreen()
       },
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.white,
-        primaryColor: const Color.fromRGBO(102, 192, 100, 1),
+        textTheme: GoogleFonts.kalamTextTheme(Theme.of(context)
+            .textTheme), // Establece Kalam como la fuente predeterminada
+        // Otros estilos de tema si los tienes
       ),
     );
   }
