@@ -10,9 +10,9 @@
         </intent>
     </queries>
     <application
-        android:label="en_learn"
+        android:label="CBATalk"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

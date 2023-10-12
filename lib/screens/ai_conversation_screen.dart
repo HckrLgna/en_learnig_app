@@ -22,8 +22,8 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   bool _isRecording = false;
   
   late SpeechToText speechToText;
-  //late StreamSubscription _recorderStatus;
-  //late StreamSubscription<List<int>> _audioStreamSubscription;
+  late StreamSubscription _recorderStatus;
+  late StreamSubscription<List<int>> _audioStreamSubscription;
   late DialogflowGrpcV2Beta1 dialogflow;
 
   late FlutterTts flutterTts;
@@ -57,10 +57,10 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     setState(() {});
 
     print(res);
-    //speak("Hello, I'm C b a Talk.");
+    speak("Hello, I'm C b a Talk.");
   }
   void stopStream() async {
-    //await _audioStreamSubscription.cancel();
+      await _audioStreamSubscription.cancel();
   }
 
   void handleSubmitted(text) async {
@@ -81,7 +81,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
     // getting meaningful response text
     String fulfillmentText = data.queryResult.fulfillmentText;
-    //print(fulfillmentText);
+    print(fulfillmentText);
     if (fulfillmentText.isNotEmpty) {
       ChatMessage botMessage = ChatMessage(
         text: fulfillmentText,
@@ -180,7 +180,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: TextField(
-                      enabled: false,
+                      enabled: true,
                       controller: _textController,
                       onSubmitted: handleSubmitted,
                       decoration: const InputDecoration.collapsed(
@@ -205,14 +205,8 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                       iconSize: 30.0,
                       icon: Icon(_isRecording ? Icons.mic_outlined :Icons.mic_off_outlined),
                       onPressed: () {
-                        if ( _isRecording ){
-                          setState(() {
-                            _stopListening();
-                          });
-                        }else{
+                        
                            handleStream();
-                        }
-                       
                       }),
                 ),
               ],
