@@ -13,25 +13,29 @@ class AiToolsMenuScreen extends StatelessWidget {
       body: Container(
         color: Colors.white,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 200,
               ),
-              Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OptionMenu(
-                      title: "Conversaciones interactivas", color: Colors.red),
-                  OptionMenu(
-                      title: "Recursos Gramaticales", color: Colors.orange),
-                  OptionMenu(title: "Evaluar Gramatica", color: Colors.purple)
+                  TextButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, 'ai_conversation'), 
+                    child: const OptionMenu(
+                        title: "Conversaciones interactivas", color: Colors.red),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(context, 'ai_check_grammar'),
+                    child: const OptionMenu(title: "Evaluar Gramatica", color: Colors.orange))
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -42,7 +46,6 @@ class AiToolsMenuScreen extends StatelessWidget {
                           Navigator.pushNamed(context, 'ai_translate'),
                       child: const OptionMenu(
                           title: "Traducciones", color: Color.fromARGB(255, 5, 6, 6))),
-                  OptionMenu(title: "Otros", color: Colors.green),
                 ],
               )
             ],

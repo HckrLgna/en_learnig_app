@@ -17,9 +17,9 @@ class RoutesApp extends StatefulWidget {
 class _RoutesAppState extends State<RoutesApp> {
   int indexTap=0;
   final List<Widget> widgetsChildern = [
-      HomeScreen(),
-      AiToolsScreen(),
-      ProfileScreen()
+      const HomeScreen(),
+      const AiToolsMenuScreen(),
+      const ProfileScreen()
       
   ];
   void onTapTapped(int index){
@@ -33,7 +33,6 @@ class _RoutesAppState extends State<RoutesApp> {
       body: widgetsChildern[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          
           canvasColor: Colors.white,
           primaryColor: Colors.purple
         ),

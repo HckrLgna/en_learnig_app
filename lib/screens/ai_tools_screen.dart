@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 
 
 class AiToolsScreen extends StatelessWidget {
-  const AiToolsScreen({super.key});
+  final Widget screen;
+  const AiToolsScreen({super.key, required this.screen});
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: PreferredSize(
+    return Scaffold(
+      appBar: const PreferredSize(
           preferredSize: Size.fromHeight(60),
           child: AppBarCustomize(title: "Explore")),
-      body: AiConversationScreen()
+      body: screen,
     );
   }
 }
