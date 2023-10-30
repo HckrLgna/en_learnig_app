@@ -6,50 +6,54 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color fontColor = Color.fromRGBO(33, 33, 33, 0.8);
     return Scaffold(
-        appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(60),
-            child: AppBarCustomize(title: 'Home')),
-        body: Center(
-          child: Container(
-            width: 350,
-            height: 150,
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(20.0), // Espaciado interno del contenedor
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0), // Bordes redondos
-              color: Colors.white, // Color de fondo
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5), // Sombra
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "¡Bienvenido a Cba Talk!",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 3, 54, 112), // Azul oscuro
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10.0),
-                Text(
-                  "Próximamente, *Placement test*",
-                  style: TextStyle(
-                    color: Colors.black54, // Color del subtitulo
-                    fontSize: 16.0,
-                  ),
-                ),
-              ],
-            ),
+        body: Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.amber,
+
+      margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
+      padding: const EdgeInsets.symmetric(
+          horizontal: 20, vertical: 10), // Espaciado interno del contenedor
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 0),
+          TitleCustomize(
+              data: "Hi! Good Morning.",
+              fontSize: 30,
+              isBold: true,
+              color: fontColor),
+          const SizedBox(height: 5),
+          TitleCustomize(
+              data: 'Angel', fontSize: 30, isBold: false, color: fontColor),
+          const SizedBox(height: 10),
+          TitleCustomize(
+              data: "Conversation availables:",
+              fontSize: 20,
+              isBold: true,
+              color: fontColor),
+          Row(
+            children: [
+              const Icon(Icons.train),
+              TitleCustomize(
+                  data: "BASIC", fontSize: 15, isBold: false, color: fontColor),
+            ],
           ),
-        ));
+          Container(
+            height: 200,
+            child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Item $index'),
+                );
+              },
+            ),
+          )
+        ],
+      ),
+    ));
   }
 }
