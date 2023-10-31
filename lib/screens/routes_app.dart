@@ -76,8 +76,8 @@ class _RoutesAppState extends State<RoutesApp> {
       backgroundColor: Color.fromRGBO(255, 255, 255, 0.1),
       items: [
         FSMenuItem(
-          icon: const Icon(Icons.ac_unit, color: Colors.black),
-          text: const Text('Translate', style: TextStyle(color: Colors.black)),
+          icon: const Icon(Icons.translate, color: Colors.white),
+          text: const Text('Translate', style: TextStyle(color: Colors.grey)),
           gradient: blueGradient,
           onTap: () {
             setState(() {
@@ -86,8 +86,8 @@ class _RoutesAppState extends State<RoutesApp> {
           },
         ),
         FSMenuItem(
-          icon: const Icon(Icons.wb_sunny, color: Colors.black),
-          text: const Text('Conversation', style: TextStyle(color: Colors.black)),
+          icon: const Icon(Icons.speaker_notes_outlined, color: Colors.white),
+          text: const Text('Conversation', style: TextStyle(color: Colors.grey)),
           gradient: redGradient,
           onTap: () {
             setState(() {
@@ -96,8 +96,8 @@ class _RoutesAppState extends State<RoutesApp> {
           },
         ),
         FSMenuItem(
-          icon: const Icon(Icons.flash_on, color: Colors.black),
-          text: const Text('Check Gramar', style: TextStyle(color: Colors.black)),
+          icon: const Icon(Icons.check_circle_outline, color: Colors.white),
+          text: const Text('Check Gramar', style: TextStyle(color: Colors.grey)),
           gradient: orangeGradient,
           onTap: () {
             setState(() {
