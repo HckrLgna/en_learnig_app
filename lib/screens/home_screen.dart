@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
           horizontal: 20, vertical: 10), // Espaciado interno del contenedor
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           const SizedBox(height: 0),
           TitleCustomize(
               data: "Hi! Good Morning.",
@@ -41,17 +41,7 @@ class HomeScreen extends StatelessWidget {
                   data: "BASIC", fontSize: 15, isBold: false, color: fontColor),
             ],
           ),
-          Container(
-            height: 200,
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Item $index'),
-                );
-              },
-            ),
-          )
+           
         ],
       ),
     ));
