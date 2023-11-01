@@ -6,21 +6,39 @@ class AiTranslateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        const Icon(Icons.circle),
-        const SizedBox(
-          child: Text("Respuesta"),
-        ),
-        Container(
-          height: 400,
-          width: 200,
-          color: Color.fromRGBO(68, 70, 84, 1),
-          child: Text("data", style: TextStyle(color: Colors.white),),
-        ),
-        const SizedBox(
-          child: Text("Ingrese la frase o palabra a interpreta"),
-          
-        )
+      children: <Widget>[
+         Container(
+          height: 100,
+          color: Colors.grey,
+         ),
+         Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Container(
+                height: 300,
+                width: 300,
+                color: Color.fromARGB(255, 177, 105, 105),
+              ),
+              Positioned(
+                
+                bottom: 20,
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  color: Color.fromARGB(255, 223, 8, 8),
+                ),
+              ),
+              Positioned(
+                bottom: 20,
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  color: Color.fromARGB(255, 30, 163, 108),
+                ),
+              ),
+            ],
+            
+         )
       ],
     );
   }
