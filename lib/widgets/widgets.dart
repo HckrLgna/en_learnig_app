@@ -1,5 +1,6 @@
 
 export 'package:en_learn/widgets/title_customize.dart';
+export 'package:en_learn/widgets/fab_bottom_app_bar.dart';
 
 export 'package:en_learn/widgets/chatMessage.dart';
 

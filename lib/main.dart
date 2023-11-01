@@ -1,5 +1,6 @@
 import 'package:en_learn/screens/ai_menu_tools_screen.dart';
 import 'package:en_learn/screens/ai_tools_screen.dart';
+import 'package:en_learn/screens/ai_translate_screen.dart';
 
 import 'package:en_learn/screens/screens.dart';
 import 'package:en_learn/services/services.dart';
@@ -44,8 +45,11 @@ class _MyAppState extends State<MyApp> {
         'check_auth_screen': (_) => const CheckAuthScreen(),
         'login': (_) => const LoginScreen(),
         'home': (_) => const RoutesApp(),
+
         'ai_menu': (_) => const AiToolsMenuScreen(),
-        'ai_translate': (_) => const AiToolsScreen()
+        'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen() ),
+        'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen() ),
+        'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen() ),
       },
       theme: ThemeData.light().copyWith(
         textTheme: GoogleFonts.kalamTextTheme(Theme.of(context)
