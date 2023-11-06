@@ -1,9 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:highlight_text/highlight_text.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
-class AiTranslateScreen extends StatelessWidget {
+
+class AiTranslateScreen extends StatefulWidget {
   const AiTranslateScreen({super.key});
 
+  @override
+  State<AiTranslateScreen> createState() => _AiTranslateScreenState();
+}
+
+class _AiTranslateScreenState extends State<AiTranslateScreen> {
+  final Map<String, HighlightedWord> _highlights = {
+    'How': HighlightedWord(
+      onTap: () => print('flutter'),
+      textStyle: const TextStyle(
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    'do': HighlightedWord(
+      onTap: () => print('voice'),
+      textStyle: const TextStyle(
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    'you': HighlightedWord(
+      onTap: () => print('subscribe'),
+      textStyle: const TextStyle(
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    'say': HighlightedWord(
+      onTap: () => print('like'),
+      textStyle: const TextStyle(
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    'in english': HighlightedWord(
+      onTap: () => print('english'),
+      textStyle: const TextStyle(
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  };
+
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = 'Press the button and start speaking';
+  double _confidence = 1.0;
+
+  @override
+  void initState() {
+    _speech = stt.SpeechToText();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,14 +105,13 @@ class AiTranslateScreen extends StatelessWidget {
                         height: 100,
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 20, right: 20),
-                        child: const SingleChildScrollView(
-                          child: Text(
-                            "how do you say comida in english?",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(68, 70, 84, 0.4)),
-                          ),
+                        child: TextHighlight(
+                          text: _text,
+                          words: _highlights,
+                          textStyle: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(68, 70, 84, 0.4)),
                         ),
                       ),
                     ],
@@ -133,7 +188,7 @@ class AiTranslateScreen extends StatelessWidget {
                       width: 10,
                     ),
                     AvatarGlow(
-                      animate: true,
+                      animate: _isListening,
                       endRadius: 60,
                       glowColor: const Color.fromRGBO(217, 217, 217, 0.6),
                       duration: const Duration(milliseconds: 2000),
@@ -144,10 +199,13 @@ class AiTranslateScreen extends StatelessWidget {
                           color: const Color.fromRGBO(68, 70, 84, 0.4),
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: const Icon(
-                          Icons.mic_off_sharp,
-                          color: Color.fromRGBO(68, 70, 84, 1),
-                          size: 35,
+                        child: IconButton(
+                          onPressed: _listen,
+                          icon: Icon( _isListening ? Icons.mic_none_sharp :
+                            Icons.mic_off_sharp,
+                            color: Color.fromRGBO(68, 70, 84, 1),
+                            size: 35,
+                          ),
                         ),
                       ),
                     ),
@@ -175,5 +233,29 @@ class AiTranslateScreen extends StatelessWidget {
         )
       ],
     );
+  }
+
+
+    void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {
+              _confidence = val.confidence;
+            }
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
   }
 }

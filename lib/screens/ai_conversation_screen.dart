@@ -143,83 +143,122 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-      child: Column(
-        children: [
-          Flexible(
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        Positioned(
+            bottom: 0,
+            width: 410,
             child: Container(
-              height: 500,
-              decoration: BoxDecoration(
-                  border:
-                      Border.all(color: const Color.fromRGBO(217, 217, 217, 1)),
-                  color: const Color.fromRGBO(217, 217, 217, 0.3),
-                  borderRadius: const BorderRadius.all(Radius.circular(20))),
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(10.0),
-                  reverse: true,
-                  itemBuilder: (_, index) => GestureDetector(
-                        onTap: () {
-                          print("se selecciono $index");
-                        },
-                        child: _messages[index],
+              height: 650,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 131, 131, 131),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(70),
+                    topRight: Radius.circular(70)),
+              ),
+            )),
+        Positioned(
+          bottom: 0,
+          width: 410,
+          child: Container(
+            height: 500,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(70), topRight: Radius.circular(70)),
+            ),
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 290,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color.fromRGBO(217, 217, 217, 1)),
+                        color: const Color.fromRGBO(217, 217, 217, 0.3),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(70),
+                            topRight: Radius.circular(70),
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30)),
                       ),
-                  itemCount: _messages.length),
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            //width: MediaQuery.sizeOf(context).width,
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              border: Border.all(color: const Color.fromRGBO(217, 217, 217, 1)),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            //margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: Row(
-              children: <Widget>[
-                Flexible(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: TextField(
-                      enabled: true,
-                      controller: _textController,
-                      onSubmitted: handleSubmitted,
-                      decoration: const InputDecoration.collapsed(
-                          hintText: "Listening"),
+                      child: ListView.builder(
+                          padding: const EdgeInsets.all(10.0),
+                          reverse: true,
+                          itemBuilder: (_, index) => GestureDetector(
+                                onTap: () {
+                                  print("se selecciono $index");
+                                },
+                                child: _messages[index],
+                              ),
+                          itemCount: _messages.length),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: IconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: () => handleSubmitted(_textController.text),
+                  const SizedBox(
+                    height: 30,
                   ),
-                ),
-              ],
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    //width: MediaQuery.sizeOf(context).width,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      border: Border.all(
+                          color: const Color.fromRGBO(217, 217, 217, 1)),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    //margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    child: Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: TextField(
+                              enabled: true,
+                              controller: _textController,
+                              onSubmitted: handleSubmitted,
+                              decoration: const InputDecoration.collapsed(
+                                  hintText: "Listening"),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: IconButton(
+                            icon: const Icon(Icons.send),
+                            onPressed: () =>
+                                handleSubmitted(_textController.text),
+                          ),
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color.fromRGBO(217, 217, 217, 1)),
+                          child: IconButton(
+                              iconSize: 30.0,
+                              icon: Icon(_isRecording
+                                  ? Icons.mic_outlined
+                                  : Icons.mic_off_outlined),
+                              onPressed: () {
+                                handleStream();
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color.fromRGBO(217, 217, 217, 1)),
-            child: IconButton(
-                iconSize: 30.0,
-                icon: Icon(
-                    _isRecording ? Icons.mic_outlined : Icons.mic_off_outlined),
-                onPressed: () {
-                  handleStream();
-                }),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
