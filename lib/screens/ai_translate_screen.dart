@@ -35,27 +35,27 @@ class AiTranslateScreen extends StatelessWidget {
                       Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 50, top: 20),
-                            child: Text("Query:",
+                            margin: const EdgeInsets.only(left: 50, top: 20),
+                            child: const Text("Query:",
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: const Color.fromRGBO(68, 70, 84, 1))),
+                                    color: Color.fromRGBO(68, 70, 84, 1))),
                           ),
                           
                         ],
                       ),
                       Container(
                         height: 100,
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.only(left: 20, right: 20),
-                        child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(left: 20, right: 20),
+                        child: const SingleChildScrollView(
                           child: Text(
                             "how do you say comida in english?",
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: const Color.fromRGBO(68, 70, 84, 0.4)),
+                                color: Color.fromRGBO(68, 70, 84, 0.4)),
                           ),
                         ),
                       ),
@@ -79,32 +79,32 @@ class AiTranslateScreen extends StatelessWidget {
                       Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 50, top: 20),
-                            child: Text("Response:",
+                            margin: const EdgeInsets.only(left: 50, top: 20),
+                            child: const Text("Response:",
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: const Color.fromRGBO(68, 70, 84, 1))),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 150, top: 20),
+                            margin: const EdgeInsets.only(left: 150, top: 20),
                             child: IconButton(
                                 onPressed: () {},
-                                icon: Icon(Icons.volume_up_rounded)),
+                                icon: const Icon(Icons.volume_up_rounded)),
                           )
                         ],
                       ),
                       Container(
                         height: 100,
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.only(left: 20, right: 20),
-                        child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(left: 20, right: 20),
+                        child: const SingleChildScrollView(
                           child: Text(
                             "It is a long established fact that a reader will be distracted by the readabledg established fact that a reader will be distracted by the readable content of a page when looking at its layout.).",
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal,
-                                color: const Color.fromRGBO(68, 70, 84, 1)),
+                                color: Color.fromRGBO(68, 70, 84, 1)),
                           ),
                         ),
                       ),
@@ -117,7 +117,7 @@ class AiTranslateScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 50),
+                      margin: const EdgeInsets.only(top: 50),
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(

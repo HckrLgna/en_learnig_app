@@ -20,7 +20,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
   bool _isRecording = false;
-  
+
   late SpeechToText speechToText;
   late StreamSubscription _recorderStatus;
   late StreamSubscription<List<int>> _audioStreamSubscription;
@@ -36,9 +36,10 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   Future<void> initPlugin() async {
     // initializing speech t otext plugin
     speechToText = SpeechToText();
-    
+
     flutterTts = FlutterTts();
-    _messages.add(const ChatMessage(text: "Hello, I'm CbaTalk.", name: "CbaTalk", type:false));
+    _messages.add(const ChatMessage(
+        text: "Hello, I'm CbaTalk.", name: "CbaTalk", type: false));
 
     // Initialize speech recognition services, returns true if successful, false if failed.
 
@@ -59,8 +60,9 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     print(res);
     speak("Hello, I'm C b a Talk.");
   }
+
   void stopStream() async {
-      await _audioStreamSubscription.cancel();
+    await _audioStreamSubscription.cancel();
   }
 
   void handleSubmitted(text) async {
@@ -95,6 +97,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
       });
     }
   }
+
   void _onSpeechResult(SpeechRecognitionResult result) async {
     String lastWords = result.recognizedWords;
 
@@ -120,11 +123,12 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     );
   }
 
-  void speak(String message)async{
+  void speak(String message) async {
     await flutterTts.setLanguage("en-US");
     await flutterTts.setPitch(1);
     await flutterTts.speak(message);
   }
+
   void _stopListening() async {
     await speechToText.stop();
   }
@@ -147,18 +151,19 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
             child: Container(
               height: 500,
               decoration: BoxDecoration(
-                  border: Border.all(color: const Color.fromRGBO(217, 217, 217, 1)),
+                  border:
+                      Border.all(color: const Color.fromRGBO(217, 217, 217, 1)),
                   color: const Color.fromRGBO(217, 217, 217, 0.3),
                   borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: ListView.builder(
                   padding: const EdgeInsets.all(10.0),
                   reverse: true,
                   itemBuilder: (_, index) => GestureDetector(
-                    onTap: () {
-                      print("se selecciono $index");
-                    },
-                    child: _messages[index],
-                  ),
+                        onTap: () {
+                          print("se selecciono $index");
+                        },
+                        child: _messages[index],
+                      ),
                   itemCount: _messages.length),
             ),
           ),
@@ -184,7 +189,6 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                       controller: _textController,
                       onSubmitted: handleSubmitted,
                       decoration: const InputDecoration.collapsed(
-                              
                           hintText: "Listening"),
                     ),
                   ),
@@ -196,21 +200,23 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                     onPressed: () => handleSubmitted(_textController.text),
                   ),
                 ),
-                Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color.fromRGBO(217, 217, 217, 1)
-                  ),
-                  child: IconButton(
-                      iconSize: 30.0,
-                      icon: Icon(_isRecording ? Icons.mic_outlined :Icons.mic_off_outlined),
-                      onPressed: () {
-                        
-                           handleStream();
-                      }),
-                ),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromRGBO(217, 217, 217, 1)),
+            child: IconButton(
+                iconSize: 30.0,
+                icon: Icon(
+                    _isRecording ? Icons.mic_outlined : Icons.mic_off_outlined),
+                onPressed: () {
+                  handleStream();
+                }),
           ),
         ],
       ),
