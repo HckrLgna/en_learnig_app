@@ -30,6 +30,37 @@ class AiTranslateScreen extends StatelessWidget {
                         topLeft: Radius.circular(70),
                         topRight: Radius.circular(70)),
                   ),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 50, top: 20),
+                            child: Text("Query:",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color.fromRGBO(68, 70, 84, 1))),
+                          ),
+                          
+                        ],
+                      ),
+                      Container(
+                        height: 100,
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: SingleChildScrollView(
+                          child: Text(
+                            "how do you say comida in english?",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromRGBO(68, 70, 84, 0.4)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Positioned(
@@ -63,12 +94,11 @@ class AiTranslateScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      SingleChildScrollView(
-                        child: Container(
-                          color: Colors.grey[200],
-                          height: 100,
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(left: 20, right: 20),
+                      Container(
+                        height: 100,
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: SingleChildScrollView(
                           child: Text(
                             "It is a long established fact that a reader will be distracted by the readabledg established fact that a reader will be distracted by the readable content of a page when looking at its layout.).",
                             style: TextStyle(
