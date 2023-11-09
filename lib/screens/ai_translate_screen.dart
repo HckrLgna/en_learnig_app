@@ -1,3 +1,4 @@
+import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:highlight_text/highlight_text.dart';
@@ -131,24 +132,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 50, top: 20),
-                            child: const Text("Response:",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color.fromRGBO(68, 70, 84, 1))),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 150, top: 20),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.volume_up_rounded)),
-                          )
-                        ],
-                      ),
+                      RowTitleSound(title: "Query", data: "Texto vacio", size: 20.0, color: Color.fromRGBO(68, 70, 84, 1) ,),
                       Container(
                         height: 100,
                         padding: const EdgeInsets.all(10),
@@ -259,3 +243,5 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
     }
   }
 }
+
+
