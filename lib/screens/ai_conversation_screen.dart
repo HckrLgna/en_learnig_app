@@ -150,14 +150,20 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
             bottom: 0,
             width: 410,
             child: Container(
-              height: 650,
+              height: 670,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 131, 131, 131),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(70),
                     topRight: Radius.circular(70)),
               ),
-            )),
+              child:  Stack(
+                children: [
+                  Positioned(top: 0, left:0, right:0, child: ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(70), topRight: Radius.circular(70)), child: Image.network("https://avantideas.com/wp-content/uploads/2023/06/mejores-practicas-para-conversaciones-de-coaching.jpg", fit: BoxFit.fill,))),
+                ],
+               ),
+            )
+        ),
         Positioned(
           bottom: 0,
           width: 410,
@@ -169,18 +175,18 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                   topLeft: Radius.circular(70), topRight: Radius.circular(70)),
             ),
             child: Padding(
-              padding:
-                  const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+              padding: const EdgeInsets.only(
+                  top: 0, left: 0, right: 0, bottom: 20),
               child: Column(
                 children: [
                   Expanded(
                     child: Container(
+                      padding: const EdgeInsets.all(10.0),
                       height: 290,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color.fromRGBO(217, 217, 217, 1)),
-                        color: const Color.fromRGBO(217, 217, 217, 0.3),
-                        borderRadius: const BorderRadius.only(
+                      decoration: const BoxDecoration(
+                         
+                        color: Color.fromRGBO(217, 217, 217, 0.3),
+                        borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(70),
                             topRight: Radius.circular(70),
                             bottomLeft: Radius.circular(30),
@@ -202,6 +208,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                     height: 30,
                   ),
                   Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
                     padding: const EdgeInsets.all(8),
                     //width: MediaQuery.sizeOf(context).width,
                     decoration: BoxDecoration(

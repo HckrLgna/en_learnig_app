@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CardConversationCustom(),
+          CardConversationCustom(count: 10, available: true,),
           const SizedBox(
             height: 10,
           ),
@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CardConversationCustom(),
+          CardConversationCustom(count: 2, available: false),
         ],
       ),
     ));
@@ -68,18 +68,21 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CardConversationCustom extends StatelessWidget {
-  const CardConversationCustom({
-    super.key,
+   int count;
+   bool available;
+  CardConversationCustom({
+    super.key, required this.count, required this.available
   });
 
   @override
   Widget build(BuildContext context) {
+    String res = available ? "Available" : "No available";
     return SizedBox(
       height: 150,
       width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: count,
         itemBuilder: (context, int index) {
           return InkWell(
             onTap: () {
@@ -96,15 +99,15 @@ class CardConversationCustom extends StatelessWidget {
               alignment: Alignment.center,
               width: 150,
               margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CircleAvatar(
+                children: <Widget> [
+                  const CircleAvatar(
                     radius: 35,
                     backgroundImage: AssetImage('assets/user.png'),
                   ),
-                  Text("Greatings", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  Text("Available", style: TextStyle(color: Colors.green),)
+                  const Text("Greatings", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text( res , style: TextStyle(color: available? Colors.green: Colors.red),)
                 ],
               ),
             ),
