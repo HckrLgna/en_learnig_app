@@ -40,10 +40,6 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     flutterTts = FlutterTts();
     _messages.add(const ChatMessage(
         text: "Hello, I'm CbaTalk.", name: "CbaTalk", type: false));
-
-    // Initialize speech recognition services, returns true if successful, false if failed.
-
-    // requiried for setting up dialogflow
     final serviceAccount = ServiceAccount.fromString(
       await rootBundle.loadString(
         'assets/credentials.json',
@@ -57,7 +53,6 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     dialogflow = DialogflowGrpcV2Beta1.viaServiceAccount(serviceAccount);
     setState(() {});
 
-    print(res);
     speak("Hello, I'm C b a Talk.");
   }
 
@@ -100,7 +95,6 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
   void _onSpeechResult(SpeechRecognitionResult result) async {
     String lastWords = result.recognizedWords;
-
     // setting textediting controller to the speech value and moving cursor at the end
     _textController.text = lastWords;
     _textController.selection = TextSelection.collapsed(
