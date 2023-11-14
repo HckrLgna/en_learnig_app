@@ -5,8 +5,9 @@ class RowTitleSound extends StatelessWidget {
   Color color;
   String title;
   String data;
+  IconData icon;
   RowTitleSound({
-    super.key, required this.title, required this.data, required this.size, required this.color
+    super.key, required this.title, required this.data, required this.size, required this.color, required this.icon
   });
 
   @override
@@ -22,10 +23,10 @@ class RowTitleSound extends StatelessWidget {
                   color: color)),
         ),
         Container(
-          margin: const EdgeInsets.only(left: 150, top: 20),
+          margin: const EdgeInsets.only(left: 120, top: 20),
           child: IconButton(
               onPressed: () {},
-              icon: const Icon(Icons.volume_up_rounded)),
+              icon: Icon(icon), color: Color.fromRGBO(200, 200, 200, 1),),
         )
       ],
     );

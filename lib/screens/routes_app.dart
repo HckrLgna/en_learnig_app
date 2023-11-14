@@ -58,14 +58,11 @@ class _RoutesAppState extends State<RoutesApp> {
         isExtended: false,
 
         onPressed: () => showFullScreenMenu(context),
-        child: const SizedBox(
-          width: 100,
-          height: 100,
-          child: CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 40,
-            backgroundImage: AssetImage('assets/Boot.png'),
-          ),
+        child: CircleAvatar(
+          
+          backgroundColor: Colors.white,
+           radius: 25,
+          backgroundImage: AssetImage('assets/Boot.png'),
         )
       ),
     );

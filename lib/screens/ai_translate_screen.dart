@@ -54,6 +54,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
+  String _response = "It is a long established fact that a reader will be distracted by the readabledg established fact that a reader will be distracted by the readable content of a page when looking at its layout.).";
   double _confidence = 1.0;
 
   @override
@@ -61,6 +62,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
     _speech = stt.SpeechToText();
     super.initState();
   }
+ 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -132,15 +134,15 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      RowTitleSound(title: "Query", data: "Texto vacio", size: 20.0, color: Color.fromRGBO(68, 70, 84, 1) ,),
+                      RowTitleSound(title: "Response:", data: "Texto vacio", size: 20.0, color: Color.fromRGBO(68, 70, 84, 1) ,icon: Icons.volume_up_rounded),
                       Container(
                         height: 100,
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 20, right: 20),
-                        child: const SingleChildScrollView(
+                        child: SingleChildScrollView(
                           child: Text(
-                            "It is a long established fact that a reader will be distracted by the readabledg established fact that a reader will be distracted by the readable content of a page when looking at its layout.).",
-                            style: TextStyle(
+                            _response,
+                            style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal,
                                 color: Color.fromRGBO(68, 70, 84, 1)),
@@ -163,8 +165,14 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                         color: const Color.fromRGBO(0, 102, 129, 1),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: const Icon(
-                        Icons.replay_rounded,
+                      child:   IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _text="Press the button and start speaking";
+                            _response="";
+                          });
+                        },
+                        icon: const Icon(Icons.replay_rounded),
                         color: Colors.white,
                       ),
                     ),
@@ -204,8 +212,11 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                         color: const Color.fromRGBO(0, 102, 129, 1),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: const Icon(
-                        Icons.send,
+                      child:IconButton(
+                        onPressed: () {
+                          debugPrint("Se presiono enviar");
+                        },
+                        icon: const Icon(Icons.send),
                         color: Colors.white,
                       ),
                     ),
