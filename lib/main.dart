@@ -47,9 +47,9 @@ class _MyAppState extends State<MyApp> {
         'home': (_) => const RoutesApp(),
 
         'ai_menu': (_) => const AiToolsMenuScreen(),
-        'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen() ),
-        'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ) ),
-        'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen() ),
+        'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen(), title: 'translate',),
+        'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ), title: 'Conversation', ),
+        'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen(), title: 'Check Grammar', ),
       },
       theme: ThemeData.light().copyWith(
         textTheme: GoogleFonts.kalamTextTheme(Theme.of(context)

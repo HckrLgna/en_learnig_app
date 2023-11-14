@@ -1,3 +1,4 @@
+import 'package:en_learn/services/chat_gpt_service.dart';
 import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
@@ -213,8 +214,13 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child:IconButton(
-                        onPressed: () {
-                          debugPrint("Se presiono enviar");
+                        onPressed: () async {
+                          try {
+                            var res = await sendRequest(_text);
+                            print(res);
+                          } catch (e) {
+                            print('Error: $e');
+                          }
                         },
                         icon: const Icon(Icons.send),
                         color: Colors.white,

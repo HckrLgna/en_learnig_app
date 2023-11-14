@@ -22,9 +22,9 @@ class _RoutesAppState extends State<RoutesApp> {
     const HomeScreen(),
     const ProfileScreen(),
 
-    const AiToolsScreen(screen: AiTranslateScreen()),
-    const AiToolsScreen(screen: AiConversationScreen()),
-    const AiToolsScreen(screen: AiCheckGrammarScreen())
+    const AiToolsScreen(screen: AiTranslateScreen(), title: 'Translate'),
+    const AiToolsScreen(screen: AiConversationScreen(), title: 'Conversation'),
+    const AiToolsScreen(screen: AiCheckGrammarScreen(), title: 'Check Grammar',)
   ];
   void onTapTapped(int index) {
     setState(() {
@@ -58,7 +58,7 @@ class _RoutesAppState extends State<RoutesApp> {
         isExtended: false,
 
         onPressed: () => showFullScreenMenu(context),
-        child: CircleAvatar(
+        child: const CircleAvatar(
           
           backgroundColor: Colors.white,
            radius: 25,
