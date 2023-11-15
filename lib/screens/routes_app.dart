@@ -21,10 +21,6 @@ class _RoutesAppState extends State<RoutesApp> {
   final List<Widget> widgetsChildern = [
     const HomeScreen(),
     const ProfileScreen(),
-
-    const AiToolsScreen(screen: AiTranslateScreen(), title: 'Translate'),
-    const AiToolsScreen(screen: AiConversationScreen(), title: 'Conversation'),
-    const AiToolsScreen(screen: AiCheckGrammarScreen(), title: 'Check Grammar',)
   ];
   void onTapTapped(int index) {
     setState(() {
@@ -35,34 +31,38 @@ class _RoutesAppState extends State<RoutesApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: widgetsChildern[indexTap],
-      bottomNavigationBar: FABBottomAppBar(
-          selectedColor: Colors.blue,
-          backgroundColor: Colors.white,
-          centerItemText: 'AiTools',
-          color: Colors.grey,
-          notchedShape: const CircularNotchedRectangle(),
-
-          onTabSelected: (value) {
-            setState(() {
-              indexTap = value;
-            });
-          },
-          items:[
-            FABBottomAppBarItem(iconData: Icons.home, text: 'home'),
-            FABBottomAppBarItem(iconData: Icons.person_sharp, text: 'profile'),
-          ]),
+      bottomNavigationBar:  BottomNavigationBar(
+        currentIndex: indexTap,
+          onTap: onTapTapped,
+          items:  const [
+              BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home',
+              backgroundColor: Color.fromRGBO(0, 102, 129, 1)
+              ),
+               
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_sharp),
+                label: 'Profile',
+                backgroundColor: Color.fromRGBO(0, 102, 129, 1)
+              ),
+               
+          ]
+        ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: FloatingActionButton(
         disabledElevation: 0.0,
         isExtended: false,
-
+        shape: const CircleBorder(),
+        backgroundColor: Colors.white,
         onPressed: () => showFullScreenMenu(context),
+        
         child: const CircleAvatar(
-          
           backgroundColor: Colors.white,
-           radius: 25,
-          backgroundImage: AssetImage('assets/Boot.png'),
+          radius: 19.5,
+          backgroundImage: AssetImage('assets/Boot_old.png'),
         )
       ),
     );
@@ -71,7 +71,7 @@ class _RoutesAppState extends State<RoutesApp> {
   void showFullScreenMenu(BuildContext context) {
     FullScreenMenu.show(
       context,
-      backgroundColor: Color.fromRGBO(255, 255, 255, 0.1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 0.1),
       items: [
         FSMenuItem(
           icon: const Icon(Icons.translate, color: Colors.white),
@@ -79,7 +79,7 @@ class _RoutesAppState extends State<RoutesApp> {
           gradient: blueGradient,
           onTap: () {
             setState(() {
-              indexTap = 2;
+              Navigator.pushNamed(context, 'ai_translate');
             });
           },
         ),
@@ -89,22 +89,20 @@ class _RoutesAppState extends State<RoutesApp> {
           gradient: redGradient,
           onTap: () {
             setState(() {
-              indexTap = 3;
+               Navigator.pushNamed(context, 'ai_conversation');
             });
           },
         ),
         FSMenuItem(
           icon: const Icon(Icons.check_circle_outline, color: Colors.white),
-          text: const Text('Check Gramar', style: TextStyle(color: Colors.grey)),
+          text: const Text('Check Grammar', style: TextStyle(color: Colors.grey)),
           gradient: orangeGradient,
           onTap: () {
             setState(() {
-              indexTap = 4;
+              Navigator.pushNamed(context, 'ai_check_grammar');
             });
           },
-        ),
-         
-         
+        ),  
       ],
     );
   }

@@ -1,7 +1,12 @@
+import 'package:en_learn/services/notifications_service.dart';
 import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+
+import '../services/chat_gpt_service.dart';
 
 class AiCheckGrammarScreen extends StatefulWidget {
   const AiCheckGrammarScreen({super.key});
@@ -48,9 +53,25 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
       ),
     ),
   };
+  late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
+  String _response = '';
   double _confidence = 1.0;
+  late FlutterTts flutterTts;
+
+  @override
+  void initState() {
+    _speech = stt.SpeechToText();
+    super.initState();
+    flutterTts = FlutterTts();
+  }
+
+  void speak(String message) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1);
+    await flutterTts.speak(message);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,18 +85,36 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: Color.fromRGBO(217, 217, 217, 1),
+                  color: const Color.fromRGBO(217, 217, 217, 1),
                   width: 1,
                 ),
                 color: const Color.fromRGBO(0, 102, 129, 1)),
             child: Column(
               children: [
-                RowTitleSound(
-                  title: "Query input:",
-                  data: "texto vacio",
-                  color: Color.fromRGBO(250, 250, 250, 1),
-                  size: 18,
-                  icon: Icons.delete,
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 50, top: 20),
+                      child: const Text("Query Input",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 120, top: 20),
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _text = 'Press the button and start speaking';
+                            _response = '';
+                          });
+                        },
+                        icon: const Icon(Icons.delete),
+                        color: const Color.fromRGBO(200, 200, 200, 1),
+                      ),
+                    )
+                  ],
                 ),
                 Container(
                   height: 100,
@@ -100,7 +139,7 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: Color.fromRGBO(217, 217, 217, 1),
+                  color: const Color.fromRGBO(217, 217, 217, 1),
                   width: 1,
                 ),
                 color: const Color.fromRGBO(255, 255, 255, 1)),
@@ -111,29 +150,48 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const Text("Mispelled Word:", style: TextStyle(fontWeight: FontWeight.bold),),
-                    const SizedBox(height: 10,),
-                    Container(
+                    const Text(
+                      "Mispelled Word:",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
                       height: 80,
-                      child: const Text(
-                        "It is a long established fact that a reader will be distracted by the readabledg  .",
-                        style: TextStyle(
+                      child: Text(
+                        _response,
+                        style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.normal,
                             color: Color.fromRGBO(68, 70, 84, 1)),
                       ),
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(onPressed: () {
-                          debugPrint("primer icono");
-                        }, icon: const Icon(Icons.copy)),
-                        const SizedBox(width: 20,),
-                        IconButton(onPressed: (){}, icon: const Icon(Icons.share)),
-                        const SizedBox(width: 20,),
-                        IconButton(onPressed: (){}, icon: const Icon(Icons.volume_up_rounded))
+                        IconButton(
+                            onPressed: () {
+                              NotificationsService.showSnackBar(
+                                  "Copied to clipboard");
+                            },
+                            icon: const Icon(Icons.copy)),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.share)),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              speak(_response);
+                            },
+                            icon: const Icon(Icons.volume_up_rounded))
                       ],
                     )
                   ],
@@ -142,7 +200,7 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
             ),
           ),
           AvatarGlow(
-            animate: false,
+            animate: _isListening,
             endRadius: 60,
             glowColor: const Color.fromRGBO(217, 217, 217, 0.6),
             duration: const Duration(milliseconds: 2000),
@@ -154,9 +212,9 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
                 borderRadius: BorderRadius.circular(50),
               ),
               child: IconButton(
-                onPressed: () => {},
-                icon: const Icon(
-                  Icons.mic_off_sharp,
+                onPressed: _listen,
+                icon: Icon(
+                  _isListening ? Icons.mic_none_sharp : Icons.mic_off_sharp,
                   color: Color.fromRGBO(68, 70, 84, 1),
                   size: 35,
                 ),
@@ -169,9 +227,19 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
           top: 230,
           child: CircleAvatar(
             radius: 50,
-            backgroundColor: Color.fromRGBO(217, 217, 217, 1),
+            backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
             child: IconButton(
-              onPressed: () => {},
+              onPressed: () async {
+                print('Enviando: $_text');
+                try {
+                  var res = await sendRequest("Correct this please: $_text");
+                  setState(() {
+                    _response = res['respuesta'];
+                  });
+                } catch (e) {
+                  print('Error: $e');
+                }
+              },
               icon: const Icon(
                 Icons.replay_circle_filled_outlined,
                 color: Color.fromRGBO(68, 70, 84, 1),
@@ -180,5 +248,28 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
             ),
           ))
     ]);
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {
+              _confidence = val.confidence;
+            }
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
   }
 }

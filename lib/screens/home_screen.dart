@@ -1,3 +1,5 @@
+import 'package:en_learn/model/Course.dart';
+import 'package:en_learn/services/api_cba.dart';
 import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 0),
           TitleCustomize(
-              data: "Hi! Good Morning.",
+              data: "Hi! Good Night.",
               fontSize: 30,
               isBold: true,
               color: fontColor),
@@ -29,7 +31,7 @@ class HomeScreen extends StatelessWidget {
               data: 'Angel', fontSize: 30, isBold: false, color: fontColor),
           const SizedBox(height: 10),
           TitleCustomize(
-              data: "Conversation availables:",
+              data: "Your courses:",
               fontSize: 20,
               isBold: true,
               color: fontColor),
@@ -60,7 +62,30 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CardConversationCustom(count: 2, available: false),
+          Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.withOpacity(0.3),
+              ),
+              alignment: Alignment.center,
+              width: 150,
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 35,
+                      backgroundImage: AssetImage('assets/surpass.jpg'),
+                    ),
+                    Text("BDA01", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                    Text("PERIODO 13", style: TextStyle(color: Colors.black)),
+                  ],
+                ),
+              ),
+            )
         ],
       ),
     ));
@@ -77,43 +102,52 @@ class CardConversationCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String res = available ? "Available" : "No available";
-    return SizedBox(
-      height: 150,
-      width: double.infinity,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: count,
-        itemBuilder: (context, int index) {
-          return InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, 'ai_conversation');
-            
-              debugPrint("Tapped on container $index" );
-            },
-            child: Container(
+    return  SizedBox(
+  height: 150,
+  width: double.infinity,
+  child: FutureBuilder<List<Course>>(
+    future: fetchCourses(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return CircularProgressIndicator(
+           
+        ); // Muestra un indicador de carga mientras se obtienen los datos.
+      } else if (snapshot.hasError) {
+        return Text('Error: ${snapshot.error}');
+      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return Text('No hay cursos disponibles');
+      } else {
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: snapshot.data!.length,
+          itemBuilder: (context, index) {
+            final course = snapshot.data![index];
+
+            return Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey
-                      .withOpacity(0.3) // Color de fondo del contenedor
-                  ),
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.withOpacity(0.3),
+              ),
               alignment: Alignment.center,
               width: 150,
               margin: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget> [
+                children: <Widget>[
                   const CircleAvatar(
                     radius: 35,
-                    backgroundImage: AssetImage('assets/user.png'),
+                    backgroundImage: AssetImage('assets/topnotch.jpg'),
                   ),
-                  const Text("Greatings", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  Text( res , style: TextStyle(color: available? Colors.green: Colors.red),)
+                  Text(course.name, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text(course.description, style: TextStyle(color: Colors.black)),
                 ],
               ),
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        );
+      }
+    },
+  ),
+);
   }
 }

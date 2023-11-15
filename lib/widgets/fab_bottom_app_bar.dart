@@ -10,8 +10,8 @@ class FABBottomAppBar extends StatefulWidget {
   FABBottomAppBar({
     required this.items,
     required this.centerItemText,
-    this.height = 60, 
-    this.iconSize =  24,
+    this.height = 10, 
+    this.iconSize =  20,
     required this.backgroundColor,
     required this.color,
     required this.selectedColor,
@@ -67,20 +67,15 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
   }
 
   Widget _buildMiddleTabItem() {
-    return Expanded(
-      child: SizedBox(
-        height: widget.height,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: widget.iconSize),
-            Text(
-              widget.centerItemText ?? '',
-              style: TextStyle(color: widget.color),
-            ),
-          ],
-        ),
+    return SizedBox(
+      height: 10,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          
+          
+        ],
       ),
     );
   }
@@ -91,30 +86,19 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     required ValueChanged<int> onPressed,
   }) {
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
-    return Expanded(
-      child: SizedBox(
-        height: widget.height,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => onPressed(index),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(item.iconData, color: color, size: widget.iconSize),
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: Text(
-                    item.text,
-                    style: TextStyle(
-                        color: color,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
-            ),
+    return SizedBox(
+      height: 10,
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          onTap: () => onPressed(index),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(item.iconData, color: color, size: widget.iconSize),
+               
+            ],
           ),
         ),
       ),

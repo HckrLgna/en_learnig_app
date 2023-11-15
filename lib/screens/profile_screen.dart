@@ -126,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color.fromRGBO(0, 102, 129, 1),
-                minimumSize: Size(280,
+                minimumSize: const Size(280,
                     50), // Hace que el botón ocupe todo el ancho y tenga una altura de 50
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(

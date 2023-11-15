@@ -2,9 +2,9 @@ import 'package:en_learn/services/chat_gpt_service.dart';
 import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-
 
 class AiTranslateScreen extends StatefulWidget {
   const AiTranslateScreen({super.key});
@@ -55,15 +55,23 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
-  String _response = "It is a long established fact that a reader will be distracted by the readabledg established fact that a reader will be distracted by the readable content of a page when looking at its layout.).";
+  String _response = "";
   double _confidence = 1.0;
+  late FlutterTts flutterTts;
 
   @override
   void initState() {
     _speech = stt.SpeechToText();
     super.initState();
+    flutterTts = FlutterTts();
   }
- 
+
+  void speak(String message) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1);
+    await flutterTts.speak(message);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -102,7 +110,6 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                                     fontWeight: FontWeight.bold,
                                     color: Color.fromRGBO(68, 70, 84, 1))),
                           ),
-                          
                         ],
                       ),
                       Container(
@@ -135,7 +142,29 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      RowTitleSound(title: "Response:", data: "Texto vacio", size: 20.0, color: Color.fromRGBO(68, 70, 84, 1) ,icon: Icons.volume_up_rounded),
+                      Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 50, top: 20),
+                            child: const Text("Response: ",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(68, 70, 84, 1))),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 150, top: 20),
+                            child: IconButton(
+                              onPressed: () {
+                                debugPrint("se presiono el boton de sonido");
+                                speak(_response);
+                              },
+                              icon: const Icon(Icons.volume_up_sharp),
+                              color: const Color.fromRGBO(200, 200, 200, 1),
+                            ),
+                          )
+                        ],
+                      ),
                       Container(
                         height: 100,
                         padding: const EdgeInsets.all(10),
@@ -166,11 +195,11 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                         color: const Color.fromRGBO(0, 102, 129, 1),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child:   IconButton(
+                      child: IconButton(
                         onPressed: () {
                           setState(() {
-                            _text="Press the button and start speaking";
-                            _response="";
+                            _text = "Press the button and start speaking";
+                            _response = "";
                           });
                         },
                         icon: const Icon(Icons.replay_rounded),
@@ -194,8 +223,10 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                         ),
                         child: IconButton(
                           onPressed: _listen,
-                          icon: Icon( _isListening ? Icons.mic_none_sharp :
-                            Icons.mic_off_sharp,
+                          icon: Icon(
+                            _isListening
+                                ? Icons.mic_none_sharp
+                                : Icons.mic_off_sharp,
                             color: Color.fromRGBO(68, 70, 84, 1),
                             size: 35,
                           ),
@@ -213,11 +244,14 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                         color: const Color.fromRGBO(0, 102, 129, 1),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child:IconButton(
+                      child: IconButton(
                         onPressed: () async {
+                          print('Enviando: $_text');
                           try {
                             var res = await sendRequest(_text);
-                            print(res);
+                            setState(() {
+                              _response = res['respuesta'];
+                            });
                           } catch (e) {
                             print('Error: $e');
                           }
@@ -236,8 +270,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
     );
   }
 
-
-    void _listen() async {
+  void _listen() async {
     if (!_isListening) {
       bool available = await _speech.initialize(
         onStatus: (val) => print('onStatus: $val'),
@@ -260,5 +293,3 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
     }
   }
 }
-
-
