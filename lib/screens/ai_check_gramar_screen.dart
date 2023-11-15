@@ -201,21 +201,21 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
           ),
           AvatarGlow(
             animate: _isListening,
-            endRadius: 60,
-            glowColor: const Color.fromRGBO(217, 217, 217, 0.6),
+            endRadius: 50,
+            glowColor: Colors.black,
             duration: const Duration(milliseconds: 2000),
             child: Container(
               height: 80,
               width: 80,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(68, 70, 84, 0.4),
+                color: Color.fromRGBO(159, 218, 218,1),
                 borderRadius: BorderRadius.circular(50),
               ),
               child: IconButton(
                 onPressed: _listen,
                 icon: Icon(
                   _isListening ? Icons.mic_none_sharp : Icons.mic_off_sharp,
-                  color: Color.fromRGBO(68, 70, 84, 1),
+                  color: Colors.black,
                   size: 35,
                 ),
               ),

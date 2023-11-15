@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "CbaTalk",
-      initialRoute: 'login',
+      initialRoute: 'home',
       navigatorKey: navigatorKey,
       routes: {
         'check_auth_screen': (_) => const CheckAuthScreen(),
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         'home': (_) => const RoutesApp(),
 
         'ai_menu': (_) => const AiToolsMenuScreen(),
-        'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen(), title: 'How do you say?',),
+        'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen(), title: 'Tools gramatical',),
         'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ), title: 'Conversation', ),
         'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen(), title: 'Check Grammar', ),
       },

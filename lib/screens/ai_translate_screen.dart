@@ -1,5 +1,5 @@
 import 'package:en_learn/services/chat_gpt_service.dart';
-import 'package:en_learn/widgets/widgets.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -79,6 +79,56 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
         Container(
           height: 150,
           color: Colors.white,
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              margin: const EdgeInsets.only(right: 10.0),
+              child: const CircleAvatar(
+                backgroundImage: AssetImage('assets/ChatBoot.png'),
+                radius: 35,
+              ),
+            ),
+            Container(
+              height: 110,
+              width: 310,
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text(
+                    "Instructions:",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 5.0),
+                    child: DefaultTextStyle(
+                        style: const TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'Agne',
+                            color: Colors.black),
+                        child: AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                                'You can say: How do you say ... in english?',
+                                speed: const Duration(milliseconds: 200)),
+                            TypewriterAnimatedText(
+                                'You can say: What is the meaning of ... ?',
+                                speed: const Duration(milliseconds: 200)),
+                          ],
+                          totalRepeatCount: 2,
+                          pause: const Duration(milliseconds: 1000),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ]),
         ),
         Container(
           color: Colors.white,
@@ -166,18 +216,21 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                         ],
                       ),
                       Container(
-                        height: 100,
+                        height: 160,
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         child: SingleChildScrollView(
-                          child: Text(
-                            _response,
-                            style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.normal,
-                                color: Color.fromRGBO(68, 70, 84, 1)),
-                          ),
-                        ),
+                            child: DefaultTextStyle(
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color.fromRGBO(68, 70, 84, 1)),
+                                child: AnimatedTextKit(animatedTexts: [
+                                  TyperAnimatedText(_response,speed: const Duration(milliseconds: 100))
+
+                                ],
+                                totalRepeatCount: 1,
+                                ))),
                       ),
                     ],
                   ),
@@ -211,14 +264,14 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                     ),
                     AvatarGlow(
                       animate: _isListening,
-                      endRadius: 60,
-                      glowColor: const Color.fromRGBO(217, 217, 217, 0.6),
+                      endRadius: 55,
+                      glowColor: Colors.black26,
                       duration: const Duration(milliseconds: 2000),
                       child: Container(
                         height: 80,
                         width: 80,
                         decoration: BoxDecoration(
-                          color: const Color.fromRGBO(68, 70, 84, 0.4),
+                          color: Colors.cyan[100],
                           borderRadius: BorderRadius.circular(50),
                         ),
                         child: IconButton(
@@ -227,7 +280,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                             _isListening
                                 ? Icons.mic_none_sharp
                                 : Icons.mic_off_sharp,
-                            color: Color.fromRGBO(68, 70, 84, 1),
+                            color: Colors.grey[800],
                             size: 35,
                           ),
                         ),

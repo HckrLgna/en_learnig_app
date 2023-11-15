@@ -163,6 +163,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
           width: 410,
           child: Container(
             height: 500,
+            
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -175,10 +176,10 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
                 children: [
                   Expanded(
                     child: Container(
+                      margin: const EdgeInsets.only(top: 33),
                       padding: const EdgeInsets.all(10.0),
                       height: 290,
                       decoration: const BoxDecoration(
-                         
                         color: Color.fromRGBO(217, 217, 217, 0.3),
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(70),
