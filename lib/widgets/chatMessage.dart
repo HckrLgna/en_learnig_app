@@ -14,7 +14,6 @@ class ChatMessage extends StatelessWidget {
 
   List<Widget> otherMessage(context) {
     return <Widget>[
-      
       Container(
         margin: const EdgeInsets.only(right: 10.0),
         child: const CircleAvatar(
@@ -24,7 +23,7 @@ class ChatMessage extends StatelessWidget {
       ),
       Expanded(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.grey),
@@ -56,7 +55,7 @@ class ChatMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text(name ?? "", style: Theme.of(context).textTheme.subtitle1),
+            Text(name ?? "", style: Theme.of(context).textTheme.titleMedium),
             Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: Text(text ?? ""),

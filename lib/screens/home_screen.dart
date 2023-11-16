@@ -1,6 +1,7 @@
 import 'package:en_learn/model/Course.dart';
 import 'package:en_learn/services/api_cba.dart';
 import 'package:en_learn/widgets/widgets.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -45,7 +46,10 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CardConversationCustom(count: 10, available: true,),
+          CardConversationCustom(
+            count: 10,
+            available: true,
+          ),
           const SizedBox(
             height: 10,
           ),
@@ -63,29 +67,30 @@ class HomeScreen extends StatelessWidget {
             height: 10,
           ),
           Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey.withOpacity(0.3),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            alignment: Alignment.center,
+            width: 150,
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 35,
+                    backgroundImage: AssetImage('assets/surpass.jpg'),
+                  ),
+                  Text("BDA01",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text("PERIODO 13", style: TextStyle(color: Colors.black)),
+                ],
               ),
-              alignment: Alignment.center,
-              width: 150,
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 35,
-                      backgroundImage: AssetImage('assets/surpass.jpg'),
-                    ),
-                    Text("BDA01", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                    Text("PERIODO 13", style: TextStyle(color: Colors.black)),
-                  ],
-                ),
-              ),
-            )
+            ),
+          )
         ],
       ),
     ));
@@ -93,61 +98,69 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CardConversationCustom extends StatelessWidget {
-   int count;
-   bool available;
-  CardConversationCustom({
-    super.key, required this.count, required this.available
-  });
+  int count;
+  bool available;
+  CardConversationCustom(
+      {super.key, required this.count, required this.available});
 
   @override
   Widget build(BuildContext context) {
     String res = available ? "Available" : "No available";
-    return  SizedBox(
-  height: 150,
-  width: double.infinity,
-  child: FutureBuilder<List<Course>>(
-    future: fetchCourses(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator(
-           
-        ); // Muestra un indicador de carga mientras se obtienen los datos.
-      } else if (snapshot.hasError) {
-        return Text('Error: ${snapshot.error}');
-      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-        return Text('No hay cursos disponibles');
-      } else {
-        return ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: snapshot.data!.length,
-          itemBuilder: (context, index) {
-            final course = snapshot.data![index];
+    return SizedBox(
+      height: 150,
+      width: double.infinity,
+      child: FutureBuilder<List<Course>>(
+        future: fetchCourses(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator(
+              strokeWidth: 8,
+            ); // Muestra un indicador de carga mientras se obtienen los datos.
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Text('No hay cursos disponibles');
+          } else {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final course = snapshot.data![index];
 
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey.withOpacity(0.3),
-              ),
-              alignment: Alignment.center,
-              width: 150,
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  const CircleAvatar(
-                    radius: 35,
-                    backgroundImage: AssetImage('assets/topnotch.jpg'),
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey.withOpacity(0.3),
                   ),
-                  Text(course.name, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  Text(course.description, style: TextStyle(color: Colors.black)),
-                ],
-              ),
+                  alignment: Alignment.center,
+                  width: 150,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      CircularPercentIndicator(
+                        radius: 45.0,
+                        lineWidth: 10.0,
+                        percent: 0.2,
+                        center: const CircleAvatar(
+                          radius: 35,
+                          backgroundImage: AssetImage('assets/topnotch.jpg'),
+                        ),
+                        progressColor: Colors.blue,
+                      ),
+                      Text(course.name,
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold)),
+                      Text(course.description,
+                          style: TextStyle(color: Colors.black)),
+                    ],
+                  ),
+                );
+              },
             );
-          },
-        );
-      }
-    },
-  ),
-);
+          }
+        },
+      ),
+    );
   }
 }

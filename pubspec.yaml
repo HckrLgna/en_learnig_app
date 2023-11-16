@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animated_text_kit: ^4.2.2
   avatar_glow: ^2.0.2
   circular_bottom_navigation: ^2.3.0
   cupertino_icons: ^1.0.2
@@ -43,6 +44,7 @@ dependencies:
   google_sign_in: ^6.1.5
   highlight_text: ^1.7.0
   http: ^1.1.0
+  percent_indicator: ^4.2.3
   provider: ^6.0.5
   speech_to_text: ^6.3.0
 
