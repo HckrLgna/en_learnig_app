@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:en_learn/model/Conversations.dart';
-import 'package:en_learn/services/dialogflow_service.dart';
 import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:dialogflow_grpc/dialogflow_grpc.dart';
@@ -11,18 +9,17 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter/services.dart';
 
-class AiConversationScreen extends StatefulWidget {
-  const AiConversationScreen({super.key});
+class AiConversationScreenCopy extends StatefulWidget {
+  const AiConversationScreenCopy({super.key});
 
   @override
-  State<AiConversationScreen> createState() => _AiConversationScreenState();
+  State<AiConversationScreenCopy> createState() => _AiConversationScreenCopyState();
 }
 
-class _AiConversationScreenState extends State<AiConversationScreen> {
+class _AiConversationScreenCopyState extends State<AiConversationScreenCopy> {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
   bool _isRecording = false;
-
 
   late SpeechToText speechToText;
   late StreamSubscription _recorderStatus;
@@ -30,14 +27,10 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   late DialogflowGrpcV2Beta1 dialogflow;
 
   late FlutterTts flutterTts;
-
-
-
   @override
   void initState() {
     super.initState();
     initPlugin();
-    sendIntent("talk about conversation");
   }
 
   Future<void> initPlugin() async {
@@ -45,7 +38,8 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     speechToText = SpeechToText();
 
     flutterTts = FlutterTts();
-  
+    _messages.add(const ChatMessage(
+        text: "Hello, I'm CbaTalk.", name: "CbaTalk", type: false));
     final serviceAccount = ServiceAccount.fromString(
       await rootBundle.loadString(
         'assets/credentials.json',
@@ -59,8 +53,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     dialogflow = DialogflowGrpcV2Beta1.viaServiceAccount(serviceAccount);
     setState(() {});
 
-    handleSubmitted("Conversation about occupation");
-
+    speak("Hello, I'm C b a Talk.");
   }
 
   void stopStream() async {
@@ -72,7 +65,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
     ChatMessage message = ChatMessage(
       text: text,
-      name: "Angel ",
+      name: "You",
       type: true,
     );
 

@@ -1,3 +1,5 @@
+import 'package:dialogflow_grpc/generated/google/cloud/dialogflow/v2/conversation.pb.dart';
+import 'package:en_learn/model/Conversations.dart';
 import 'package:en_learn/model/Course.dart';
 import 'package:en_learn/services/api_cba.dart';
 import 'package:en_learn/widgets/widgets.dart';
@@ -5,8 +7,9 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+    HomeScreen({super.key});
+  var titles = ["Occupation", "presentation"];
+  var assets = ["assets/occupation.jpg", "assets/presentation.png"];
   @override
   Widget build(BuildContext context) {
     Color fontColor = Color.fromRGBO(33, 33, 33, 0.8);
@@ -23,7 +26,7 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 0),
           TitleCustomize(
-              data: "Hi! Good Night.",
+              data: "Hi! Good Morning.",
               fontSize: 30,
               isBold: true,
               color: fontColor),
@@ -32,7 +35,7 @@ class HomeScreen extends StatelessWidget {
               data: 'Angel', fontSize: 30, isBold: false, color: fontColor),
           const SizedBox(height: 10),
           TitleCustomize(
-              data: "Your courses:",
+              data: "Conversation availables:",
               fontSize: 20,
               isBold: true,
               color: fontColor),
@@ -46,10 +49,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CardConversationCustom(
-            count: 10,
-            available: true,
-          ),
+          CardConversationCustom( titles: titles, assets: assets),
           const SizedBox(
             height: 10,
           ),
@@ -68,29 +68,23 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.grey.withOpacity(0.3),
-            ),
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey
+                    .withOpacity(0.3) // Color de fondo del contenedor
+                ),
             alignment: Alignment.center,
             width: 150,
+            height: 200,
             margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 35,
-                    backgroundImage: AssetImage('assets/surpass.jpg'),
-                  ),
-                  Text("BDA01",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  Text("PERIODO 13", style: TextStyle(color: Colors.black)),
-                ],
-              ),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("No available",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              ],
             ),
-          )
+          ),
         ],
       ),
     ));
@@ -98,67 +92,64 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CardConversationCustom extends StatelessWidget {
-  int count;
-  bool available;
-  CardConversationCustom(
-      {super.key, required this.count, required this.available});
+  final List<String> titles;
+  final List<String> assets;
+  const CardConversationCustom({
+    super.key, required this.titles, required this.assets,
+  });
 
   @override
   Widget build(BuildContext context) {
-    String res = available ? "Available" : "No available";
     return SizedBox(
       height: 150,
       width: double.infinity,
-      child: FutureBuilder<List<Course>>(
-        future: fetchCourses(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator(
-              strokeWidth: 8,
-            ); // Muestra un indicador de carga mientras se obtienen los datos.
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Text('No hay cursos disponibles');
-          } else {
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final course = snapshot.data![index];
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 2,
+        itemBuilder: (context, int index) {
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, 'ai_conversation',
+                  arguments: AiConversationArguments(
+                      title: "Conversation about Occupations",
+                      entity: "occupations",
+                      path: "assets/occupations.json"));
 
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.withOpacity(0.3),
+              debugPrint("Tapped on container $index");
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey
+                      .withOpacity(0.3) // Color de fondo del contenedor
                   ),
-                  alignment: Alignment.center,
-                  width: 150,
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      CircularPercentIndicator(
-                        radius: 45.0,
-                        lineWidth: 10.0,
-                        percent: 0.2,
-                        center: const CircleAvatar(
-                          radius: 35,
-                          backgroundImage: AssetImage('assets/topnotch.jpg'),
-                        ),
-                        progressColor: Colors.blue,
-                      ),
-                      Text(course.name,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold)),
-                      Text(course.description,
-                          style: TextStyle(color: Colors.black)),
-                    ],
+              alignment: Alignment.center,
+              width: 150,
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CircularPercentIndicator(
+                    radius: 45.0,
+                    lineWidth: 10.0,
+                    percent: 0.1,
+                    center: CircleAvatar(
+                      radius: 35,
+                      backgroundImage: AssetImage(assets[index]),
+                    ),
+                    progressColor: Colors.blue,
                   ),
-                );
-              },
-            );
-          }
+                    Text(titles[index],
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  const Text(
+                    "Available",
+                    style: TextStyle(color: Colors.green),
+                  )
+                ],
+              ),
+            ),
+          );
         },
       ),
     );

@@ -19,7 +19,7 @@ class RoutesApp extends StatefulWidget {
 class _RoutesAppState extends State<RoutesApp> {
   int indexTap = 0;
   final List<Widget> widgetsChildern = [
-    const HomeScreen(),
+      HomeScreen(),
     const ProfileScreen(),
   ];
   void onTapTapped(int index) {
@@ -85,7 +85,7 @@ class _RoutesAppState extends State<RoutesApp> {
         ),
         FSMenuItem(
           icon: const Icon(Icons.speaker_notes_outlined, color: Colors.white),
-          text: const Text('Conversation', style: TextStyle(color: Colors.grey)),
+          text: const Text('ai_conversation', style: TextStyle(color: Colors.grey)),
           gradient: redGradient,
           onTap: () {
             setState(() {

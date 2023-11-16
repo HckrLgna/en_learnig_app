@@ -18,37 +18,37 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
     'How': HighlightedWord(
       onTap: () => print('flutter'),
       textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
+          color: Colors.green, fontWeight: FontWeight.bold, fontSize: 25),
     ),
     'do': HighlightedWord(
       onTap: () => print('voice'),
       textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
+          color: Colors.green, fontWeight: FontWeight.bold, fontSize: 25),
     ),
     'you': HighlightedWord(
       onTap: () => print('subscribe'),
       textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
+          color: Colors.green, fontWeight: FontWeight.bold, fontSize: 25),
     ),
     'say': HighlightedWord(
       onTap: () => print('like'),
       textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
+          color: Colors.green, fontWeight: FontWeight.bold, fontSize: 25),
+    ),
+    'What is': HighlightedWord(
+      onTap: () => print('english'),
+      textStyle: const TextStyle(
+          color: Colors.green, fontWeight: FontWeight.bold, fontSize: 25),
+    ),
+    'the meaning of': HighlightedWord(
+      onTap: () => print('english'),
+      textStyle: const TextStyle(
+          color: Colors.green, fontWeight: FontWeight.bold, fontSize: 25),
     ),
     'in english': HighlightedWord(
       onTap: () => print('english'),
       textStyle: const TextStyle(
-        color: Colors.green,
-        fontWeight: FontWeight.bold,
-      ),
+          color: Colors.green, fontWeight: FontWeight.bold, fontSize: 25),
     ),
   };
 
@@ -170,7 +170,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                           text: _text,
                           words: _highlights,
                           textStyle: const TextStyle(
-                              fontSize: 20,
+                              fontSize: 25,
                               fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(68, 70, 84, 0.4)),
                         ),
@@ -217,20 +217,14 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                       ),
                       Container(
                         height: 160,
+                        
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 20, right: 20),
-                        child: SingleChildScrollView(
-                            child: DefaultTextStyle(
-                                style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.normal,
-                                    color: Color.fromRGBO(68, 70, 84, 1)),
-                                child: AnimatedTextKit(animatedTexts: [
-                                  TyperAnimatedText(_response,speed: const Duration(milliseconds: 100))
-
-                                ],
-                                totalRepeatCount: 1,
-                                ))),
+                        child: Text(_response,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(68, 70, 84, 0.4))),
                       ),
                     ],
                   ),
@@ -304,6 +298,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                             var res = await sendRequest(_text);
                             setState(() {
                               _response = res['respuesta'];
+                              print(_response);
                             });
                           } catch (e) {
                             print('Error: $e');

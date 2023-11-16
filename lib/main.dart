@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
 
         'ai_menu': (_) => const AiToolsMenuScreen(),
         'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen(), title: 'Tools gramatical',),
-        'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ), title: 'Conversation', ),
+        'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ), title: 'Conversation' ),
         'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen(), title: 'Check Grammar', ),
       },
       theme: ThemeData.light().copyWith(
