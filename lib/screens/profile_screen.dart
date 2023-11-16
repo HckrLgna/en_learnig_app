@@ -99,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment
                             .spaceBetween, // Espacia los elementos al inicio y al final
                         children: [
-                          Row(
+                          const Row(
                             children: [
                               Icon(Icons.type_specimen), // Primer icono
                               SizedBox(

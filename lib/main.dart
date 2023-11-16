@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "CbaTalk",
-      initialRoute: 'login',
+      initialRoute: 'home',
       navigatorKey: navigatorKey,
       routes: {
         'check_auth_screen': (_) => const CheckAuthScreen(),
