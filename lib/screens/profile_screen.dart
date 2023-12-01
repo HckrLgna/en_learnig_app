@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 300,
               child: Stack(
                 alignment: Alignment.center,
@@ -74,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -85,6 +85,7 @@ class ProfileScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       // Acción que quieres realizar al presionar el botón
+                      Navigator.pushNamed(context, 'placement_test');
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -94,12 +95,12 @@ class ProfileScreen extends StatelessWidget {
                         border: Border.all(color: Colors.grey), // Borde gris
                       ),
                       padding:
-                          EdgeInsets.all(10), // Ajusta el espaciado interno
-                      child: Row(
+                          const EdgeInsets.all(10), // Ajusta el espaciado interno
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment
                             .spaceBetween, // Espacia los elementos al inicio y al final
                         children: [
-                          const Row(
+                           Row(
                             children: [
                               Icon(Icons.type_specimen), // Primer icono
                               SizedBox(
@@ -116,7 +117,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ElevatedButton(
@@ -125,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, 'login');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromRGBO(0, 102, 129, 1),
+                backgroundColor: const Color.fromRGBO(0, 102, 129, 1),
                 minimumSize: const Size(280,
                     50), // Hace que el botón ocupe todo el ancho y tenga una altura de 50
                 shape: RoundedRectangleBorder(
@@ -133,7 +134,7 @@ class ProfileScreen extends StatelessWidget {
                       10), // Ajusta el radio de los bordes
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Logout',
                 style: TextStyle(
                     fontSize: 18,

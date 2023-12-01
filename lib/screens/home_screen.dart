@@ -7,7 +7,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-    HomeScreen({super.key});
+  HomeScreen({super.key});
   var titles = ["Occupation", "presentation"];
   var assets = ["assets/occupation.jpg", "assets/presentation.png"];
   @override
@@ -15,13 +15,13 @@ class HomeScreen extends StatelessWidget {
     Color fontColor = Color.fromRGBO(33, 33, 33, 0.8);
     return Scaffold(
         body: Container(
-      height: double.infinity,
-      width: double.infinity,
+        height: double.infinity,
+        width: double.infinity,
 
-      margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
-      padding: const EdgeInsets.symmetric(
+        margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
+        padding: const EdgeInsets.symmetric(
           horizontal: 20, vertical: 10), // Espaciado interno del contenedor
-      child: Column(
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: 0),
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CardConversationCustom( titles: titles, assets: assets),
+          CardConversationCustom(titles: titles, assets: assets),
           const SizedBox(
             height: 10,
           ),
@@ -95,7 +95,9 @@ class CardConversationCustom extends StatelessWidget {
   final List<String> titles;
   final List<String> assets;
   const CardConversationCustom({
-    super.key, required this.titles, required this.assets,
+    super.key,
+    required this.titles,
+    required this.assets,
   });
 
   @override
@@ -139,7 +141,7 @@ class CardConversationCustom extends StatelessWidget {
                     ),
                     progressColor: Colors.blue,
                   ),
-                    Text(titles[index],
+                  Text(titles[index],
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   const Text(

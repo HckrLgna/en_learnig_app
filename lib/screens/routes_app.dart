@@ -38,9 +38,9 @@ class _RoutesAppState extends State<RoutesApp> {
           onTap: onTapTapped,
           items:  const [
               BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'home',
-              backgroundColor: Color.fromRGBO(0, 102, 129, 1)
+                icon: Icon(Icons.home),
+                label: 'home',
+                backgroundColor: Color.fromRGBO(0, 102, 129, 1)
               ),
                
               BottomNavigationBarItem(
@@ -58,7 +58,6 @@ class _RoutesAppState extends State<RoutesApp> {
         shape: const CircleBorder(),
         backgroundColor: Colors.white,
         onPressed: () => showFullScreenMenu(context),
-        
         child: const CircleAvatar(
           backgroundColor: Colors.white,
           radius: 19.5,

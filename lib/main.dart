@@ -50,6 +50,8 @@ class _MyAppState extends State<MyApp> {
         'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen(), title: 'Tools gramatical',),
         'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ), title: 'Conversation' ),
         'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen(), title: 'Check Grammar', ),
+
+        'placement_test': (_) => const PlacementTest(),
       },
       theme: ThemeData.light().copyWith(
         textTheme: GoogleFonts.kalamTextTheme(Theme.of(context)
