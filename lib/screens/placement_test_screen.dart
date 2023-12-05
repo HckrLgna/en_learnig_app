@@ -12,6 +12,7 @@ class PlacementTest extends StatefulWidget {
 }
 
 class _PlacementTestState extends State<PlacementTest> {
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
   var loadingPercentage = 0;
@@ -21,7 +22,7 @@ class _PlacementTestState extends State<PlacementTest> {
   String _response = "";
   double _confidence = 1.0;
   late FlutterTts flutterTts;
-  
+
   @override
   void initState() {
     _speech = stt.SpeechToText();
@@ -80,88 +81,10 @@ class _PlacementTestState extends State<PlacementTest> {
                             shadowColor: const Color.fromRGBO(
                                             123, 131, 133, 1),
                             clipBehavior: Clip.antiAlias,
-                            child: Column(
+                            child: const Column(
                               children: <Widget>[
-                                const SizedBox(width: 5),
-                                  Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 30, bottom: 5),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      "data[index]['title']",
-                                                      textAlign: TextAlign.center,
-                                                        style: const TextStyle(
-                                                            
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    4,
-                                                                    76,
-                                                                    132,
-                                                                    1),
-                                                            fontSize: 20)),
-                                                    const SizedBox(height: 3),
-                                                    SizedBox(
-                                                      child: Text(
-                                                          "data[index]['area']",
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
-                                                              fontSize: 12,
-                                                              color: Colors
-                                                                  .grey[600])),
-                                                    ),
-                                                  ],
-                                                )),
-                                  Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 35),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.19,
-                                              child: SingleChildScrollView(
-                                                child: Text("data[index]['smg']",
-                                                    textAlign:
-                                                        TextAlign.justify),
-                                              ),
-                                            ),
-                                  Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 5, top: 10.0),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                   
-                                                },
-                                                child: Text(
-                                                  "data[index]['titulo_url']",
-                                                  style: const TextStyle(
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                      color: Colors.blue),
-                                                ),
-                                              ),
-                                            ),
-                                  const SizedBox(
-                                              height: 15,
-                                            ),
-                                  Container(
-                                    padding: const EdgeInsets.only(right: 25),
-                                    alignment: Alignment.centerRight,
-                                      child: OutlinedButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                    child: const Text('Leido')),
-                                  )
-                              ],
+                                  //todo: aqui iran las preguntas
+                                ],
                             ),
                         ),
                   );
