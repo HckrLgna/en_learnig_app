@@ -3,7 +3,7 @@ import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_tts/flutter_tts.dart';
-
+import '/../widgets/alert_dialog_widget.dart';
 class PlacementTest extends StatefulWidget {
   const PlacementTest({super.key});
 
@@ -58,39 +58,36 @@ class _PlacementTestState extends State<PlacementTest> {
             height: 450,
             width: 350,
             padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: PageView.builder(
-                                  controller: _pageController,
-                                  itemCount: 5,
-                                  onPageChanged: (int index) {
-                                    setState(() {
-                                      _currentPage =
-                                          index; // Actualiza _currentPage cuando cambia la página
-                                    });
-                                  },
-                                  itemBuilder: (_, int index) {
-                                    return SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.40,
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10)),
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: 5,
+              onPageChanged: (int index) {
+                setState(() {
+                    _currentPage =
+                    index; // Actualiza _currentPage cuando cambia la página
+                  });
+                },
+                itemBuilder: (_, int index) {
+                  return SizedBox(
+                          height:MediaQuery.of(context).size.height * 0.40,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15.0)),
-                                        shadowColor: const Color.fromRGBO(
+                            shadowColor: const Color.fromRGBO(
                                             123, 131, 133, 1),
-                                        clipBehavior: Clip.antiAlias,
-                                        child: Column(
-                                          children: <Widget>[
-                                            const SizedBox(width: 5),
-                                            Padding(
+                            clipBehavior: Clip.antiAlias,
+                            child: Column(
+                              children: <Widget>[
+                                const SizedBox(width: 5),
+                                  Padding(
                                                 padding: const EdgeInsets.only(
                                                     top: 30, bottom: 5),
                                                 child: Column(
                                                   children: [
                                                     Text(
-                                                      
                                                       "data[index]['title']",
                                                       textAlign: TextAlign.center,
                                                         style: const TextStyle(
@@ -120,7 +117,7 @@ class _PlacementTestState extends State<PlacementTest> {
                                                     ),
                                                   ],
                                                 )),
-                                            Container(
+                                  Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
                                                       vertical: 10,
@@ -135,7 +132,7 @@ class _PlacementTestState extends State<PlacementTest> {
                                                         TextAlign.justify),
                                               ),
                                             ),
-                                            Padding(
+                                  Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 5, top: 10.0),
                                               child: GestureDetector(
@@ -151,10 +148,10 @@ class _PlacementTestState extends State<PlacementTest> {
                                                 ),
                                               ),
                                             ),
-                                            const SizedBox(
+                                  const SizedBox(
                                               height: 15,
                                             ),
-                                            Container(
+                                  Container(
                                               padding: const EdgeInsets.only(
                                                   right: 25),
                                               alignment: Alignment.centerRight,
@@ -164,12 +161,11 @@ class _PlacementTestState extends State<PlacementTest> {
                                                   },
                                                   child: const Text('Leido')),
                                             )
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            
+                              ],
+                            ),
+                        ),
+                  );
+              }),   
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -179,12 +175,13 @@ class _PlacementTestState extends State<PlacementTest> {
                 height: 50,
                 width: 120,
                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(0, 102, 129, 1),
+                  color: Color.fromARGB(255, 204, 215, 218),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    print("se presiono el boton exit");
+                    print('exit');
+                    showExitDialog(context);
                   },
                   child: const Text(
                     'Exit',

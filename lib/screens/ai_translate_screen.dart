@@ -217,11 +217,9 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
                       ),
                       Container(
                         height: 120,
-                        
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         child: SingleChildScrollView(
-
                           child: Text(_response,
                               style: const TextStyle(
                                   fontSize: 20,
