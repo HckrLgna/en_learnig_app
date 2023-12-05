@@ -12,7 +12,7 @@ class PlacementTest extends StatefulWidget {
 }
 
 class _PlacementTestState extends State<PlacementTest> {
-
+  final TextEditingController _textController = TextEditingController();
   final PageController _pageController = PageController();
   int _currentPage = 0;
   var loadingPercentage = 0;
@@ -22,13 +22,38 @@ class _PlacementTestState extends State<PlacementTest> {
   String _response = "";
   double _confidence = 1.0;
   late FlutterTts flutterTts;
+  late ChatMessage botMessage;
 
   @override
   void initState() {
     _speech = stt.SpeechToText();
     super.initState();
     flutterTts = FlutterTts();
+    botMessage = ChatMessage(
+      text: "Hello, I'm CbaTalk, your personal English teacher. I will help you to improve your English skills. Let's start with a placement test. I will ask you some questions and you will answer them. Let's start!",
+      name: "CbaTalk",
+      type: false,
+    );
+    
   }
+  void handleSubmitted(text) async {
+    _textController.clear();
+    ChatMessage message = ChatMessage(
+      text: text,
+      name: "User",
+      type: true,
+    );
+    setState(() {
+      botMessage = message;
+    });
+    await Future.delayed(const Duration(milliseconds: 1000));
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 1000),
+      curve: Curves.easeInOut,
+    );
+    speak(text);
+  }
+  
   void speak(String message) async {
     await flutterTts.setLanguage("en-US");
     await flutterTts.setPitch(1);
@@ -81,10 +106,18 @@ class _PlacementTestState extends State<PlacementTest> {
                             shadowColor: const Color.fromRGBO(
                                             123, 131, 133, 1),
                             clipBehavior: Clip.antiAlias,
-                            child: const Column(
+                            child: Column(
                               children: <Widget>[
                                   //todo: aqui iran las preguntas
-                                ],
+                                  botMessage,
+                                  TextField(
+                              enabled: true,
+                              controller: _textController,
+                              onSubmitted: handleSubmitted,
+                              decoration: const InputDecoration.collapsed(
+                                  hintText: "Listening"),
+                            ),
+                                ]
                             ),
                         ),
                   );

@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                         Title(
                           color: const Color.fromRGBO(0, 102, 129, 1),
                           child: const Text(
-                            "Joe Doe",
+                            "Angel Charca",
                             style: TextStyle(
                               fontSize: 24, // Tamaño de fuente
                               fontWeight: FontWeight.bold, // Negrita
@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                         const Text(
-                          "Curso: BDA12",
+                          "Curse: BDA12",
                           style: TextStyle(
                             fontSize: 16, // Tamaño de fuente
                             color: Colors.black, // Color del texto
