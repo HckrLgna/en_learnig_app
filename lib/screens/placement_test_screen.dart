@@ -21,6 +21,7 @@ class _PlacementTestState extends State<PlacementTest> {
   String _response = "";
   double _confidence = 1.0;
   late FlutterTts flutterTts;
+  
   @override
   void initState() {
     _speech = stt.SpeechToText();
@@ -152,15 +153,14 @@ class _PlacementTestState extends State<PlacementTest> {
                                               height: 15,
                                             ),
                                   Container(
-                                              padding: const EdgeInsets.only(
-                                                  right: 25),
-                                              alignment: Alignment.centerRight,
-                                              child: OutlinedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text('Leido')),
-                                            )
+                                    padding: const EdgeInsets.only(right: 25),
+                                    alignment: Alignment.centerRight,
+                                      child: OutlinedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                    child: const Text('Leido')),
+                                  )
                               ],
                             ),
                         ),
