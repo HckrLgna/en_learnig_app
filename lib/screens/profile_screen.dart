@@ -1,3 +1,4 @@
+import 'package:en_learn/providers/backend.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/services.dart';
@@ -9,6 +10,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context,listen: false);
+    final backendService = Provider.of<BackendProvider>(context,listen: false);
     return Scaffold(
       appBar: const PreferredSize(
           preferredSize: Size.fromHeight(60),
@@ -83,8 +85,9 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       // Acción que quieres realizar al presionar el botón
+                      backendService.pruebaIniciar();
                       Navigator.pushNamed(context, 'placement_test');
                     },
                     child: Container(

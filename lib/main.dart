@@ -1,3 +1,4 @@
+import 'package:en_learn/providers/backend.dart';
 import 'package:en_learn/screens/ai_menu_tools_screen.dart';
 import 'package:en_learn/screens/ai_tools_screen.dart';
 import 'package:en_learn/screens/ai_translate_screen.dart';
@@ -19,7 +20,10 @@ class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthService())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthService()),
+        ChangeNotifierProvider(create: (_) => BackendProvider())
+        ],
       child: const MyApp(),
     );
   }
