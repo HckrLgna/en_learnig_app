@@ -88,7 +88,8 @@ class ProfileScreen extends StatelessWidget {
                     onTap: () async {
                       // Acción que quieres realizar al presionar el botón
                       backendService.pruebaIniciar();
-                      Navigator.pushNamed(context, 'placement_test');
+                      print("pregunta desde profile ${backendService.preguntaActual}");
+                      Navigator.pushNamed(context, 'placement_test', arguments: backendService.preguntaActual);
                     },
                     child: Container(
                       decoration: BoxDecoration(

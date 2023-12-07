@@ -19,6 +19,8 @@ class AiConversationScreen extends StatefulWidget {
 }
 
 class _AiConversationScreenState extends State<AiConversationScreen> {
+
+
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
   bool _isRecording = false;
@@ -36,6 +38,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   @override
   void initState() {
     super.initState();
+
     initPlugin();
     sendIntent("talk about conversation");
   }

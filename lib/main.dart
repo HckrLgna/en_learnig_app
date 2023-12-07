@@ -2,6 +2,7 @@ import 'package:en_learn/providers/backend.dart';
 import 'package:en_learn/screens/ai_menu_tools_screen.dart';
 import 'package:en_learn/screens/ai_tools_screen.dart';
 import 'package:en_learn/screens/ai_translate_screen.dart';
+import 'package:en_learn/screens/profile_screen.dart';
 
 import 'package:en_learn/screens/screens.dart';
 import 'package:en_learn/services/services.dart';
@@ -54,7 +55,7 @@ class _MyAppState extends State<MyApp> {
         'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen(), title: 'Tools gramatical',),
         'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ), title: 'Conversation' ),
         'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen(), title: 'Check Grammar', ),
-
+        'profile':(_) => const ProfileScreen(),
         'placement_test': (_) => const PlacementTest(),
       },
       theme: ThemeData.light().copyWith(
