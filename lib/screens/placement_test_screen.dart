@@ -18,12 +18,10 @@ class _PlacementTestState extends State<PlacementTest> {
   
 
   final TextEditingController _textController = TextEditingController();
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
   var loadingPercentage = 0;
   late stt.SpeechToText _speech;
   bool _isListening = false;
-  String _text = 'Press the button and start speaking';
+  String _text = '  _Press the button and start speaking';
 
   String _response = "";
   double _confidence = 1.0;
@@ -69,12 +67,6 @@ class _PlacementTestState extends State<PlacementTest> {
         botMessage = message;
       });
     });
-
-    //await Future.delayed(const Duration(milliseconds: 1000));
-    //_pageController.nextPage(
-    //  duration: const Duration(milliseconds: 1000),
-    //  curve: Curves.easeInOut,
-    //);
     speak(text);
   }
 
@@ -86,9 +78,6 @@ class _PlacementTestState extends State<PlacementTest> {
 
   @override
   Widget build(BuildContext context) {
-    //preguntaIni = ModalRoute.of(context)!.settings.arguments;
-    //handleSubmitted(preguntaIni);
-    //print("desde placen $preguntaIni");
     return Scaffold(
       appBar: const PreferredSize(
           preferredSize: Size.fromHeight(60),
@@ -102,49 +91,44 @@ class _PlacementTestState extends State<PlacementTest> {
           const Padding(
             padding: EdgeInsets.all(10.0),
             child: TitleCustomize(
-                data: "Start the test:",
+                data: "Start the test",
                 fontSize: 20,
                 isBold: true,
                 color: Color.fromRGBO(0, 102, 129, 1)),
           ),
-          Container(
-            height: 450,
-            width: 350,
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-            child: PageView.builder(
-                controller: _pageController,
-                itemCount: 5,
-                onPageChanged: (int index) {
-                  setState(() {
-                    _currentPage =
-                        index; // Actualiza _currentPage cuando cambia la página
-                  });
-                },
-                itemBuilder: (_, int index) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.40,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                      shadowColor: const Color.fromRGBO(123, 131, 133, 1),
-                      clipBehavior: Clip.antiAlias,
+                SizedBox(  
+                  height: MediaQuery.of(context).size.height * 0.55,
+                  width: MediaQuery.of(context).size.width * 0.90,
+                  child: Card(
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    shadowColor: const Color.fromRGBO(123, 131, 133, 1),
+                    clipBehavior: Clip.antiAlias,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(children: <Widget>[
                         //todo: aqui iran las preguntas
                         botMessage,
-
+                        const SizedBox(height: 40.0),
                         TextField(
+                          maxLines: 6,
+
                           enabled: true,
                           controller: _textController,
                           onSubmitted: handleSubmitted,
                           decoration: InputDecoration.collapsed(
+                              
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              fillColor: Colors.white,
+                              filled: true,    
                               hintText: _text),
                         ),
                       ]),
                     ),
-                  );
-                }),
-          ),
+                  ),
+                ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -185,7 +169,9 @@ class _PlacementTestState extends State<PlacementTest> {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: IconButton(
-                    onPressed: _listen,
+                    onPressed: (){ setState(() {
+                      _text = '';
+                    }); _listen;},
                     icon: Icon(
                       _isListening ? Icons.mic_none_sharp : Icons.mic_off_sharp,
                       color: Colors.grey[800],
@@ -209,15 +195,10 @@ class _PlacementTestState extends State<PlacementTest> {
                     onPressed: () async {
                       print('Enviando: $_text');
                       try {
-                        //var res = await sendRequest(_text);
-
-                        //print(_text);
                          var respuestaBack = await backendService.pruebaSiguiente(_text);
-
                          print( "respuesta back ${respuestaBack.toString()}");
                         if( respuestaBack == "Prueba finalizada" ){
                           showExitDialog(context, "Prueba finalizada", "Su nivel es: ${backendService.resModulo}", false);
-                         //handleSubmitted(respuestaBack);
                         }else{
                           handleSubmitted(respuestaBack);
                         }
