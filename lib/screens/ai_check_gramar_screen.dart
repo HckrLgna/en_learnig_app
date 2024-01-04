@@ -74,6 +74,13 @@ class _AiCheckGrammarScreenState extends State<AiCheckGrammarScreen> {
   }
 
   @override
+  void dispose() {
+    // Escribir antes del super.dispose()    
+    flutterTts.stop();    
+    super.dispose();
+  }
+  
+  @override
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.center, children: <Widget>[
       Column(

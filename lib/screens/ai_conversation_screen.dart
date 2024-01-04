@@ -40,7 +40,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
     super.initState();
 
     initPlugin();
-    sendIntent("talk about conversation");
+    // sendIntent("talk about conversation");
   }
 
   Future<void> initPlugin() async {
@@ -75,7 +75,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
     ChatMessage message = ChatMessage(
       text: text,
-      name: "Angel ",
+      name: "Jaime ",
       type: true,
     );
 
@@ -141,6 +141,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
   void dispose() {
     //_recorderStatus.cancel();
     //_audioStreamSubscription.cancel();
+    flutterTts.stop();
     speechToText.stop();
     super.dispose();
   }

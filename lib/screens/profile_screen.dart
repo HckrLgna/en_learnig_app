@@ -36,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
                         Title(
                           color: const Color.fromRGBO(0, 102, 129, 1),
                           child: const Text(
-                            "Angel Charca",
+                            "Jaime Soto",
                             style: TextStyle(
                               fontSize: 24, // Tamaño de fuente
                               fontWeight: FontWeight.bold, // Negrita

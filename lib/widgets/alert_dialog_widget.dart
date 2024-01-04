@@ -20,7 +20,8 @@ void showExitDialog(BuildContext context, String title, String mgs, bool isTest)
             TextButton(
               child: const Text('Salir'),
               onPressed: () {
-                Navigator.of(context).pushNamed('home'); // Cierra la aplicación
+                // Navigator.of(context).pop(); // Cierra la aplicación
+                Navigator.of(context).popUntil(ModalRoute.withName('home'));
               },
             ),
           ]
@@ -28,7 +29,7 @@ void showExitDialog(BuildContext context, String title, String mgs, bool isTest)
                 TextButton(
                 child: const Text('Terminar'),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('profile'); // Cierra la aplicación
+                  Navigator.of(context).popUntil(ModalRoute.withName('home')); // Cierra la aplicación
                 },
               ),
             ]

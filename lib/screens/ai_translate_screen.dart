@@ -60,7 +60,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
   late FlutterTts flutterTts;
 
   @override
-  void initState() {
+  void initState() {    
     _speech = stt.SpeechToText();
     super.initState();
     flutterTts = FlutterTts();
@@ -70,6 +70,13 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
     await flutterTts.setLanguage("en-US");
     await flutterTts.setPitch(1);
     await flutterTts.speak(message);
+  }
+
+  @override
+  void dispose() {
+    // Escribir antes del super.dispose()    
+    flutterTts.stop();    
+    super.dispose();
   }
 
   @override

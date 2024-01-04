@@ -22,16 +22,19 @@ class _RoutesAppState extends State<RoutesApp> {
       HomeScreen(),
     const ProfileScreen(),
   ];
-  void onTapTapped(int index) {
-    setState(() {
+  void onTapTapped(int index) {    
+    if (Navigator.of(context).canPop()) {           
+      Navigator.of(context).pop();
+    }     
+    setState(() { 
       indexTap = index;
-    });
+    });     
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      
+  Widget build(BuildContext context) {   
+    indexTap = ( ModalRoute.of(context)?.settings.arguments ?? indexTap ) as int;     
+    return Scaffold(      
       body: widgetsChildern[indexTap],
       bottomNavigationBar:  BottomNavigationBar(
         currentIndex: indexTap,
@@ -42,13 +45,13 @@ class _RoutesAppState extends State<RoutesApp> {
                 label: 'home',
                 backgroundColor: Color.fromRGBO(0, 102, 129, 1)
               ),
-               
+              
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_sharp),
                 label: 'Profile',
                 backgroundColor: Color.fromRGBO(0, 102, 129, 1)
               ),
-               
+            
           ]
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
@@ -76,9 +79,10 @@ class _RoutesAppState extends State<RoutesApp> {
           icon: const Icon(Icons.translate, color: Colors.white),
           text: const Text('Translate', style: TextStyle(color: Colors.grey)),
           gradient: blueGradient,
-          onTap: () {
+          onTap: () {            
             setState(() {
-              Navigator.pushNamed(context, 'ai_translate');
+              FullScreenMenu.hide();
+              Navigator.pushNamed(context, 'ai_translate', arguments: indexTap);                            
             });
           },
         ),
@@ -88,7 +92,8 @@ class _RoutesAppState extends State<RoutesApp> {
           gradient: redGradient,
           onTap: () {
             setState(() {
-               Navigator.pushNamed(context, 'ai_conversation');
+              FullScreenMenu.hide();
+              Navigator.pushNamed(context, 'ai_conversation', arguments: indexTap);
             });
           },
         ),
@@ -98,7 +103,8 @@ class _RoutesAppState extends State<RoutesApp> {
           gradient: orangeGradient,
           onTap: () {
             setState(() {
-              Navigator.pushNamed(context, 'ai_check_grammar');
+              FullScreenMenu.hide();
+              Navigator.pushNamed(context, 'ai_check_grammar', arguments: indexTap);
             });
           },
         ),  
