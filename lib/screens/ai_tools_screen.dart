@@ -1,4 +1,6 @@
  
+
+
 import 'package:en_learn/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
@@ -24,13 +26,19 @@ class _AiToolsScreenState extends State<AiToolsScreen> {
   ];
   
   void onTapTapped(int index) {
-    setState(() {
-      indexTap = index;
-    });
-  }
+    if (Navigator.canPop(context)) {        
+      Navigator.popAndPushNamed( context, 'home', arguments: index );
+    } else {
+      setState(() {      
+        debugPrint("SET STATE");
+        indexTap = index;
+      });
+    }    
+  }  
 
   @override
   Widget build(BuildContext context) {
+    indexTap = ModalRoute.of(context)!.settings.arguments as int;        
     return Scaffold(
       appBar:  PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -44,7 +52,7 @@ class _AiToolsScreenState extends State<AiToolsScreen> {
               icon: Icon(Icons.home),
               label: 'home'
               ),
-               
+              
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_sharp),
                 label: 'Profile'
@@ -59,8 +67,7 @@ class _AiToolsScreenState extends State<AiToolsScreen> {
         shape: const CircleBorder(),
         backgroundColor: Colors.white,
         onPressed: () => showFullScreenMenu(context),
-        child: const CircleAvatar(
-          
+        child: const CircleAvatar(          
           backgroundColor: Colors.white,
           radius: 19.5,
           backgroundImage: AssetImage('assets/Boot_old.png'),
@@ -79,17 +86,19 @@ class _AiToolsScreenState extends State<AiToolsScreen> {
           gradient: blueGradient,
           onTap: () {
             setState(() {
-              Navigator.pushNamed(context, 'ai_translate');
+              FullScreenMenu.hide();              
+              Navigator.popAndPushNamed(context, 'ai_translate', arguments: indexTap);                            
             });
           },
         ),
         FSMenuItem(
           icon: const Icon(Icons.speaker_notes_outlined, color: Colors.white),
-          text: const Text('Conversation', style: TextStyle(color: Colors.grey)),
+          text: const Text('ai_conversation', style: TextStyle(color: Colors.grey)),
           gradient: redGradient,
-          onTap: () {
+          onTap: () {            
             setState(() {
-               Navigator.pushNamed(context, 'ai_conversation');
+              FullScreenMenu.hide();
+              Navigator.popAndPushNamed(context, 'ai_conversation', arguments: indexTap);
             });
           },
         ),
@@ -99,7 +108,8 @@ class _AiToolsScreenState extends State<AiToolsScreen> {
           gradient: orangeGradient,
           onTap: () {
             setState(() {
-              Navigator.pushNamed(context, 'ai_check_grammar');
+              FullScreenMenu.hide();
+              Navigator.popAndPushNamed(context, 'ai_check_grammar', arguments: indexTap);
             });
           },
         ),  

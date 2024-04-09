@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   var titles = ["Occupation", "presentation"];
-  var assets = ["assets/occupation.jpg", "assets/presentation.png"];
+  var assets = ["assets/occupation.jpg", "assets/presentation.png"];  
   @override
   Widget build(BuildContext context) {
     Color fontColor = Color.fromRGBO(33, 33, 33, 0.8);
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
               color: fontColor),
           const SizedBox(height: 5),
           TitleCustomize(
-              data: 'Angel', fontSize: 30, isBold: false, color: fontColor),
+              data: 'Jaime', fontSize: 30, isBold: false, color: fontColor),
           const SizedBox(height: 10),
           TitleCustomize(
               data: "Conversation availables:",
@@ -111,12 +111,12 @@ class CardConversationCustom extends StatelessWidget {
         itemBuilder: (context, int index) {
           return InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'ai_conversation',
-                  arguments: AiConversationArguments(
-                      title: "Conversation about Occupations",
-                      entity: "occupations",
-                      path: "assets/occupations.json"));
-
+              // Navigator.pushNamed(context, 'ai_conversation',
+              //     arguments: AiConversationArguments(
+              //         title: "Conversation about Occupations",
+              //         entity: "occupations",
+              //         path: "assets/occupations.json"));
+              Navigator.pushNamed(context, 'ai_conversation', arguments: 0);
               debugPrint("Tapped on container $index");
             },
             child: Container(

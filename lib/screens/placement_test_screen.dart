@@ -23,12 +23,12 @@ class _PlacementTestState extends State<PlacementTest> {
   bool _isListening = false;
   String _text = '  _Press the button and start speaking';
 
-  String _response = "";
+  // String _response = "";
   double _confidence = 1.0;
   late FlutterTts flutterTts;
   late ChatMessage botMessage;
   late BackendProvider backendService;
-  var preguntaIni;
+  // var preguntaIni;
 
   @override
   void initState() {
@@ -36,8 +36,8 @@ class _PlacementTestState extends State<PlacementTest> {
     super.initState();
     flutterTts = FlutterTts();
     backendService =  Provider.of<BackendProvider>(context,listen: false);
-    print(backendService.preguntaActual);
-      botMessage = ChatMessage(
+    debugPrint(backendService.preguntaActual);
+      botMessage = const ChatMessage(
         text: "Iniciando",
         name: "CbaTalk",
         type: false,
@@ -52,7 +52,7 @@ class _PlacementTestState extends State<PlacementTest> {
         botMessage = message;
       });
     });
-   
+  
   }
 
   void handleSubmitted(text) async {
@@ -137,12 +137,12 @@ class _PlacementTestState extends State<PlacementTest> {
                 height: 50,
                 width: 120,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 204, 215, 218),
+                  color: const Color.fromARGB(255, 204, 215, 218),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: ElevatedButton(
                     onPressed: () {
-                      print('exit');
+                      debugPrint('exit');
                       showExitDialog(context, "Exit", "Are you sure?", true);
                     },
                     child: const Text(
@@ -169,9 +169,7 @@ class _PlacementTestState extends State<PlacementTest> {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: IconButton(
-                    onPressed: (){ setState(() {
-                      _text = '';
-                    }); _listen;},
+                    onPressed: _listen,
                     icon: Icon(
                       _isListening ? Icons.mic_none_sharp : Icons.mic_off_sharp,
                       color: Colors.grey[800],
@@ -193,17 +191,18 @@ class _PlacementTestState extends State<PlacementTest> {
                 ),
                 child: TextButton(
                     onPressed: () async {
-                      print('Enviando: $_text');
+                      debugPrint('Enviando: $_text');
                       try {
-                         var respuestaBack = await backendService.pruebaSiguiente(_text);
-                         print( "respuesta back ${respuestaBack.toString()}");
+                          var respuestaBack = await backendService.pruebaSiguiente(_text);
+                          debugPrint( "respuesta back ${respuestaBack.toString()}");
                         if( respuestaBack == "Prueba finalizada" ){
+                          if (!context.mounted) return;
                           showExitDialog(context, "Prueba finalizada", "Su nivel es: ${backendService.resModulo}", false);
                         }else{
                           handleSubmitted(respuestaBack);
                         }
                       } catch (e) {
-                        print('Error: $e');
+                        debugPrint('Error: $e');
                       }
                     },
                     child: const Text(
@@ -218,24 +217,26 @@ class _PlacementTestState extends State<PlacementTest> {
           ),
         ],
       ),
-      bottomNavigationBar: ButtonNavigatorCustomize(),
+      // bottomNavigationBar: const ButtonNavigatorCustomize(),
     );
   }
 
   void _listen() async {
-    print("listen");
+    debugPrint("listen");
     if (!_isListening) {
       bool available = await _speech.initialize(
-        onStatus: (val) => print('onStatus: $val'),
-        onError: (val) => print('onError: $val'),
+        onStatus: (val) => debugPrint('onStatus: $val'),
+        onError: (val) => debugPrint('onError: $val'),
       );
-      print(available);
+      debugPrint(available.toString());
       if (available) {
-        setState(() => _isListening = true);
+        setState(() {
+          _isListening = true;
+          _text = '';
+        });
         _speech.listen(
           onResult: (val) => setState(() {
-            _text = val.recognizedWords;
-           
+            _text = val.recognizedWords;          
             if (val.hasConfidenceRating && val.confidence > 0) {
               _confidence = val.confidence;
             }

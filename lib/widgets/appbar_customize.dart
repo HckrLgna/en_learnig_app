@@ -9,8 +9,9 @@ class AppBarCustomize extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
+            // Navigator.pop(context);
             Navigator.pop(context);
-            print("vuelta");
+            debugPrint("vuelta");
           }, 
           icon: const Icon(Icons.arrow_back_ios, color: Color.fromRGBO(0, 102, 129, 1), weight: 10),
           ),

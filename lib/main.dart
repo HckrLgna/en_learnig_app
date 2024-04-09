@@ -50,7 +50,6 @@ class _MyAppState extends State<MyApp> {
         'check_auth_screen': (_) => const CheckAuthScreen(),
         'login': (_) => const LoginScreen(),
         'home': (_) => const RoutesApp(),
-
         'ai_menu': (_) => const AiToolsMenuScreen(),
         'ai_translate': (_) => const AiToolsScreen( screen: AiTranslateScreen(), title: 'Tools gramatical',),
         'ai_conversation': (_) => const AiToolsScreen( screen: AiConversationScreen( ), title: 'Conversation' ),

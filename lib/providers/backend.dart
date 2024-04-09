@@ -65,34 +65,5 @@ class BackendProvider extends ChangeNotifier {
     }
     
   }
-
-  void getVehiculosCliente() async {
-    // var url = Uri.http( baseUrl, 'api/vehiculo/${usuario.id}/vehiculosGet');
-    try {
-      // final response = await http.get( url );
-      // List<dynamic> jsonData = json.decode( response.body );
-      // vehiculos = jsonData.map((json) => Vehiculo.fromJson(json)).toList();
-      notifyListeners();
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
-  // Future<Usuario> login( String carnet, String contrasena ) async {
-  //   final url = Uri.http( baseUrl, 'api/auth/login');
-  //   final Map<String, dynamic> loginData = {
-  //     'carnet': carnet,
-  //     'contrasena': contrasena
-  //   };
-  //   try {
-  //     final response = await http.post( url, body: json.encode( loginData ), headers: {'Content-Type': 'application/json; charset=UTF-8'} );
-  //     final Map<String, dynamic> decodedData = json.decode( response.body );
-  //     Usuario usuario = Usuario.fromJson( decodedData );
-  //     //notifyListeners();
-  //     return usuario;
-  //   } catch (e) {
-  //     debugPrint( e.toString() );
-  //   }
-  //   return Usuario(id: 0, nombre: 'nombre', estado: 'estado');
-  // }
+  
 }
