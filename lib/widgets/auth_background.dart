@@ -10,11 +10,7 @@ class AuthBackground extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child: Stack(
-        children: [
-          const _DarkBlueBox(),
-          const _HeaderIcon(),
-           child
-           ],
+        children: [const _DarkBlueBox(), const _HeaderIcon(), child],
       ),
     );
   }
@@ -30,10 +26,10 @@ class _HeaderIcon extends StatelessWidget {
       width: double.infinity,
       height: 200,
       margin: const EdgeInsets.only(top: 30),
-      child: const Icon(
-        Icons.abc_sharp,
-        color: Colors.white,
-        size: 100,
+      child: Center(
+        child: Text('CBA Talk',
+            style: TextStyle(
+                color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold)),
       ),
     ));
   }
@@ -53,5 +49,7 @@ class _DarkBlueBox extends StatelessWidget {
   }
 
   BoxDecoration _darkBlueDecoration() => const BoxDecoration(
-      gradient: LinearGradient(colors: [Color.fromRGBO(0, 102, 109, 1), Color.fromRGBO(68, 70, 84, 1)],));
+          gradient: LinearGradient(
+        colors: [Color.fromRGBO(0, 102, 109, 1), Color.fromRGBO(68, 70, 84, 1)],
+      ));
 }
