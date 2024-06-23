@@ -13,13 +13,13 @@ class _MicrophoneWidgetState extends State<MicrophoneWidget> {
     return Container(
       width: 30,
       height: 30,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: const Color.fromRGBO(217, 217, 217, 1)),
+          color: Color.fromRGBO(217, 217, 217, 1)),
       child: Icon(
           widget.turn == false ? Icons.mic_outlined : Icons.mic_outlined,
           size: 70,
-          color: Color.fromRGBO(68, 68, 68, 1)),
+          color: const Color.fromRGBO(68, 68, 68, 1)),
     );
   }
 }
