@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BackendProvider extends ChangeNotifier {
-  String baseUrl = 'proyecto-sw2.up.railway.app';
+  String baseUrl = 'backendcbatalk-production.up.railway.app';
 
   var modulo = 3;
   var resModulo = "";

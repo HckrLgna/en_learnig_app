@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "CbaTalk",
-      initialRoute: 'login',
+      initialRoute: 'home',
       navigatorKey: navigatorKey,
       routes: {
         'check_auth_screen': (_) => const CheckAuthScreen(),
@@ -56,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         'ai_check_grammar': (_) => const AiToolsScreen( screen: AiCheckGrammarScreen(), title: 'Check Grammar', ),
         'profile':(_) => const ProfileScreen(),
         'placement_test': (_) => const PlacementTest(),
+        'score': (_) => const ScoreScreen(),
       },
       theme: ThemeData.light().copyWith(
         textTheme: GoogleFonts.kalamTextTheme(Theme.of(context)

@@ -75,7 +75,7 @@ class _AiConversationScreenState extends State<AiConversationScreen> {
 
     ChatMessage message = ChatMessage(
       text: text,
-      name: "Jaime ",
+      name: "Angel ",
       type: true,
     );
 

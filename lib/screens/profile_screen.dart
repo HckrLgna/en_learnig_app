@@ -36,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
                         Title(
                           color: const Color.fromRGBO(0, 102, 129, 1),
                           child: const Text(
-                            "Jaime Soto",
+                            "Angel Charca",
                             style: TextStyle(
                               fontSize: 24, // Tamaño de fuente
                               fontWeight: FontWeight.bold, // Negrita
@@ -111,6 +111,42 @@ class ProfileScreen extends StatelessWidget {
                                 width: 10,
                               ),
                               Text('Placement Test'), // Texto
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios), // Último icono
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      // Acción que quieres realizar al presionar el botón
+                      //backendService.pruebaIniciar();
+                      Navigator.pushNamed(context, 'score');
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white, // Fondo blanco
+                        borderRadius:
+                            BorderRadius.circular(10), // Bordes redondeados
+                        border: Border.all(color: Colors.grey), // Borde gris
+                      ),
+                      padding:
+                          const EdgeInsets.all(10), // Ajusta el espaciado interno
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .spaceBetween, // Espacia los elementos al inicio y al final
+                        children: [
+                           Row(
+                            children: [
+                              Icon(Icons.task_rounded), // Primer icono
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text('Score tests'), // Texto
                             ],
                           ),
                           Icon(Icons.arrow_forward_ios), // Último icono

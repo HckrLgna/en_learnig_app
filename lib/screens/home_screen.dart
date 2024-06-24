@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
               color: fontColor),
           const SizedBox(height: 5),
           TitleCustomize(
-              data: 'Jaime', fontSize: 30, isBold: false, color: fontColor),
+              data: 'Angel', fontSize: 30, isBold: false, color: fontColor),
           const SizedBox(height: 10),
           TitleCustomize(
               data: "Conversation availables:",
