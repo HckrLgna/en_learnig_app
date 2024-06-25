@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../services/services.dart';
 import '../widgets/widgets.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'dart:math';
 
 class ScoreScreen extends StatelessWidget {
   const ScoreScreen({super.key});
@@ -12,6 +13,10 @@ class ScoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context, listen: false);
     final backendService = Provider.of<BackendProvider>(context, listen: false);
+    var progress = Random().nextInt(9) + 1;
+    var fluency = Random().nextInt(5) + 1;
+    var pronunciation = Random().nextInt(5) + 1;
+    var rhythm = Random().nextInt(5) + 1;
     return Scaffold(
       appBar: const PreferredSize(
           preferredSize: Size.fromHeight(60),
@@ -71,8 +76,8 @@ class ScoreScreen extends StatelessWidget {
                     radius: 70.0,
                     lineWidth: 10.0,
                     percent: 0.8,
-                    header: Text("Progress"),
-                    center: CircleAvatar(
+                    header: const Text("Progress"),
+                    center: const CircleAvatar(
                       radius: 60,
                       backgroundImage: AssetImage('assets/user.png'),
                     ),
@@ -84,8 +89,19 @@ class ScoreScreen extends StatelessWidget {
             ),
           ),
           const SizedBox( height: 30, ),
+          const Center(
+                  child: Text(
+                    "Practice Progress",
+                    style: TextStyle(
+                      fontSize: 20, // Tamaño de fuente
+                      fontWeight: FontWeight.bold, // Negrita
+                      color: Color.fromRGBO(0, 102, 129, 1), // Color del texto
+                      // Puedes agregar más propiedades según tus preferencias
+                    ),
+                  ),
+                ),
           CircularPercentIndicator(
-            header: const Text("Practiced hours"),
+            
             radius: 80.0,
             animation: true,
             animationDuration: 1200,
@@ -98,68 +114,79 @@ class ScoreScreen extends StatelessWidget {
             circularStrokeCap: CircularStrokeCap.butt,
             backgroundColor: Colors.yellow,
             progressColor: Colors.red,
+            footer: const Text(
+              "Hours of practice",
+              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 17.0),
+            )
           ),
           const SizedBox( height: 25, ),
           CircularPercentIndicator(
-            header: const Text("Percent progress in the course", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
+            
             radius: 80.0,
             lineWidth: 13.0,
             animation: true,
-            percent: 0.7,
-            center:  const Text(
-              "70.0%",
+            percent: 0.7 + (progress/100),
+            center:  Text(
+              "7$progress.0%",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
             ),
             footer: const Text(
-              "Progress this week",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+              "Percent progress in the course",
+              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 17.0),
             ),
             circularStrokeCap: CircularStrokeCap.round,
             progressColor: Colors.purple,
+            
           ),
-          Padding(
-            padding: EdgeInsets.all(15.0),
-            child: new CircularPercentIndicator(
-              radius: 60.0,
-              lineWidth: 5.0,
-              percent: 1.0,
-              center: new Text("100%"),
-              progressColor: Colors.green,
-            ),
-          ),
+          const SizedBox( height: 25, ),
+          const Center(
+                  child: Text(
+                    "Speaking Skills",
+                    style: TextStyle(
+                      fontSize: 20, // Tamaño de fuente
+                      fontWeight: FontWeight.bold, // Negrita
+                      color: Color.fromRGBO(0, 102, 129, 1), // Color del texto
+                      // Puedes agregar más propiedades según tus preferencias
+                    ),
+                  ),
+                ),
           Container(
-            padding: EdgeInsets.all(15.0),
-            child: new Row(
+            padding: const EdgeInsets.all(15.0),
+            child:  Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new CircularPercentIndicator(
+                
+                CircularPercentIndicator(
                   radius: 45.0,
                   lineWidth: 4.0,
-                  percent: 0.10,
-                  center: new Text("10%"),
+                  percent: 0.10 + (fluency/100),
+                  center: Text("1$fluency%"),
                   progressColor: Colors.red,
+                  footer: const Text("Fluency"),
                 ),
-                new Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                 ),
-                new CircularPercentIndicator(
+                CircularPercentIndicator(
                   radius: 45.0,
                   lineWidth: 4.0,
-                  percent: 0.30,
-                  center: new Text("30%"),
+                  percent: 0.30 + (pronunciation/100),
+                  center: Text("3$pronunciation%"),
                   progressColor: Colors.orange,
+                  footer: const Text("Pronunciation "),
                 ),
-                new Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                 ),
-                new CircularPercentIndicator(
+                CircularPercentIndicator(
                   radius: 45.0,
                   lineWidth: 4.0,
-                  percent: 0.60,
-                  center: new Text("60%"),
+                  percent: 0.60 + (rhythm/100),
+                  center: Text("6$rhythm%"),
                   progressColor: Colors.yellow,
+                  footer: const Text("Rhythm"),
                 ),
-                new Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                 ),
               ],
