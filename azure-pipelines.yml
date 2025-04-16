@@ -1,4 +1,5 @@
 # Starter pipeline
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -11,10 +12,16 @@ pool:
 variables:
   group: shared_variables
 steps:
-- script: echo $(test), world!
-  displayName: 'Run a one-line script'
-
+- task: FlutterInstall@0
+  displayName: "Installing flutter"
+  inputs:
+    mode: 'auto'
+    channel: 'stable'
+    version: 'custom'
+    customVersion: '3.24.24'
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    flutter doctor -v
+  displayName: Runing flutter doctor
+- script: |
+    flutter pub get
+  displayName: Running pub get 
