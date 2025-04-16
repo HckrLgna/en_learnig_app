@@ -17,10 +17,15 @@ steps:
   inputs:
     mode: 'auto'
     channel: 'stable'
-    version: 'latest'
+    version: 'custom'
+    customVersion: '3.24.24'
 - script: |
     flutter doctor -v
   displayName: Runing flutter doctor
 - script: |
     flutter pub get
-  displayName: Running pub get  
+  displayName: Running pub get 
+- task: FlutterBuild@0
+  inputs:
+    target: 'aab'
+    projectDirectory: '.'
