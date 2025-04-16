@@ -24,4 +24,4 @@ steps:
   displayName: Runing flutter doctor
 - script: |
     flutter pub get
-  displayName: Running pub get 
+  displayName: Running pub get  
