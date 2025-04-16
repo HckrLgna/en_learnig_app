@@ -28,6 +28,28 @@ steps:
     flutter pub get
   displayName: Running pub get  
 
+
+
+- task: DownloadSecureFile@1
+  name: keyproperties
+  displayName: Download key.properties file
+  inputs:
+    secureFile: 'key.properties'
+
+- task: DownloadSecureFile@1
+  name: keystore
+  displayName: Download keystore file
+  inputs:
+    secureFile: 'upload-keystore.jks'
+
+- script: |
+      cp $(keyproperties.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
+      cp $(keystore.secureFilePath) $(Build.SourcesDirectory)/android/app/upload-keystore.jks
+
+      echo Android folder contents: $(ls $(Build.SourcesDirectory)/android)
+      echo App folder contents: $(ls $(Build.SourcesDirectory)/android/app)
+  displayName: Copy keystore and key properties files
+
 - script: |
     flutter build appbundle --release
   displayName: "Building aab"
