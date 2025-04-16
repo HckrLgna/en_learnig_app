@@ -25,3 +25,7 @@ steps:
 - script: |
     flutter pub get
   displayName: Running pub get 
+- task: FlutterBuild@0
+  inputs:
+    target: 'aab'
+    projectDirectory: '.'
