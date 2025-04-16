@@ -10,7 +10,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 variables:
-  group: shared_variables
+  flutterVersion: '3.24.4'
 steps:
 - task: FlutterInstall@0
   displayName: "Installing flutter"
@@ -18,6 +18,9 @@ steps:
     mode: 'auto'
     channel: 'stable'
     version: $(flutterVersion)
+- script: |
+    echo "Flutter version: $(flutterVersion)"
+  displayName: "Debugging flutterVersion"
 - script: |
     flutter doctor -v
   displayName: Runing flutter doctor
