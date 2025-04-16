@@ -50,6 +50,18 @@ steps:
       echo App folder contents: $(ls $(Build.SourcesDirectory)/android/app)
   displayName: Copy keystore and key properties files
 
-- script: |
-    flutter build appbundle --release
-  displayName: "Building aab"
+- task: FlutterBuild@0
+  displayName: Build flutter Android App
+  inputs:
+    target: 'aab'
+    projectDirectory: '.'
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/app-release.aab'
+    TargetFolder: $(Build.ArtifactStagingDirectory)
+    flattenFolders: true
+- task: PublishBuildArtifacts@1
+  inputs: 
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Android'
