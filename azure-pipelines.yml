@@ -17,15 +17,14 @@ steps:
   inputs:
     mode: 'auto'
     channel: 'stable'
-    version: '3.24.4'
+    version: $(flutterVersion)
 - script: |
     flutter doctor -v
   displayName: Runing flutter doctor
 - script: |
     flutter pub get
   displayName: Running pub get  
-- task: FlutterBuild@0
-  displayName: Building app
-  inputs:
-    target: 'aab'
-    projectDirectory: '.'
+
+- script: |
+    flutter build apk --release
+  displayName: "Building APK"
