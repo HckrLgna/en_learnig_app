@@ -18,7 +18,7 @@ steps:
     mode: 'auto'
     channel: 'stable'
     version: 'custom'
-    customVersion: '3.24.24'
+    customVersion: 'latest'
 - script: |
     flutter doctor -v
   displayName: Runing flutter doctor
