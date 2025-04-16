@@ -10,7 +10,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 variables:
-  flutterVersion: '3.24.4'
+  group: shared_variables
 steps:
 - task: FlutterInstall@0
   displayName: "Installing flutter"
