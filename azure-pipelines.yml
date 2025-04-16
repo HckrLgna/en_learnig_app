@@ -26,5 +26,5 @@ steps:
   displayName: Running pub get  
 
 - script: |
-    flutter build apk --release
-  displayName: "Building APK"
+    flutter build appbundle --release
+  displayName: "Building aab"
