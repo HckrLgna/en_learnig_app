@@ -5,63 +5,58 @@
 # https://aka.ms/yaml
 
 trigger:
-- production
+  - production
 
 pool:
   vmImage: ubuntu-latest
 variables:
-  flutterVersion: '3.24.4'
-steps:
-- task: FlutterInstall@0
-  inputs:
-    mode: 'auto'
-    channel: 'stable'
-    version: 'custom'
-    customVersion: '3.24.4'
-- script: |
-    echo "Flutter version: $(flutterVersion)"
-  displayName: "Debugging flutterVersion"
-- script: |
-    flutter doctor -v
-  displayName: Runing flutter doctor
-- script: |
-    flutter pub get
-  displayName: Running pub get  
+  - group: shared_variables
+  - group: version_variables
+  - name: app_version_name
+    value: $(app_version_major).$(app_version_minor).$(app_version_patch)
 
+name: $(app_version_major).$(app_version_minor).$(app_version_patch)+$(app_version_code)
 
+jobs:
+  - job: android_job
+    displayName: Android job
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - template: setup_flutter.yml
 
-- task: DownloadSecureFile@1
-  name: keyproperties
-  displayName: Download key.properties file
-  inputs:
-    secureFile: 'key.properties'
+      - task: DownloadSecureFile@1
+        name: keyproperties
+        displayName: Download key.properties file
+        inputs:
+          secureFile: "key.properties"
 
-- task: DownloadSecureFile@1
-  name: keystore
-  displayName: Download keystore file
-  inputs:
-    secureFile: 'key.jks'
+      - task: DownloadSecureFile@1
+        name: keystore
+        displayName: Download keystore file
+        inputs:
+          secureFile: "key.jks"
 
-- script: |
-      cp $(keyproperties.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
-      cp $(keystore.secureFilePath) $(Build.SourcesDirectory)/android/app/key.jks
+      - script: |
+          cp $(keyproperties.secureFilePath) $(Build.SourcesDirectory)/android/key.properties
+          cp $(keystore.secureFilePath) $(Build.SourcesDirectory)/android/app/key.jks
 
-      echo Android folder contents: $(ls $(Build.SourcesDirectory)/android)
-      echo App folder contents: $(ls $(Build.SourcesDirectory)/android/app)
-  displayName: Copy keystore and key properties files
+          echo Android folder contents: $(ls $(Build.SourcesDirectory)/android)
+          echo App folder contents: $(ls $(Build.SourcesDirectory)/android/app)
+        displayName: Copy keystore and key properties files
 
-- task: FlutterBuild@0
-  displayName: Build flutter Android App
-  inputs:
-    target: 'aab'
-    projectDirectory: '.'
+      - task: FlutterBuild@0
+        displayName: Build flutter Android App
+        inputs:
+          target: "aab"
+          projectDirectory: "."
 
-- task: CopyFiles@2
-  inputs:
-    Contents: '**/app-release.aab'
-    TargetFolder: $(Build.ArtifactStagingDirectory)
-    flattenFolders: true
-- task: PublishBuildArtifacts@1
-  inputs: 
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'Android'
+      - task: CopyFiles@2
+        inputs:
+          Contents: "**/app-release.aab"
+          TargetFolder: $(Build.ArtifactStagingDirectory)
+          flattenFolders: true
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+          ArtifactName: "Android"
