@@ -64,5 +64,11 @@ jobs:
       - task: PublishBuildArtifacts@1
         displayName: Publish Android Artifact
         inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-          ArtifactName: "Android"
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          artifactName: 'app'
+          publishLocation: 'Container'
+      - script: |
+          echo "Workspace content:"
+          ls -R /home/vsts/work/
+        displayName: 'Debug Workspace'
+      
