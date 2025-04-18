@@ -46,9 +46,13 @@ jobs:
         displayName: Copy keystore and key properties files
 
       - script: |
-          flutter build appbundle --release --no-tree-shake-icons \
-          --build-name=$(app_version_name) \
-          --build-number=$(app_version_code)
+          sed -i "s/versionCode [0-9]\+/versionCode $(app_version_code)/" android/app/build.gradle
+          sed -i "s/versionName \".*\"/versionName \"$(app_version_name)\"/" android/app/build.gradle
+
+          echo "Updated build.gradle:"
+          cat android/app/build.gradle | grep "versionCode\|versionName"
+
+          flutter build appbundle --release --no-tree-shake-icons
         displayName: "Build flutter Android App (AAB)"
 
       - task: CopyFiles@2
