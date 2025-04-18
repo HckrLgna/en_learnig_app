@@ -58,7 +58,9 @@ jobs:
           Contents: "**/app-release.aab"
           TargetFolder: $(Build.ArtifactStagingDirectory)
           flattenFolders: true
+
       - task: PublishBuildArtifacts@1
+        displayName: Publish Android Artifact
         inputs:
           PathtoPublish: "$(Build.ArtifactStagingDirectory)"
           ArtifactName: "Android"
