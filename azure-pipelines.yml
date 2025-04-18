@@ -50,6 +50,8 @@ jobs:
         inputs:
           target: "aab"
           projectDirectory: "."
+          buildName: $(app_version_name)
+          buildNumber: $(app_version_code)
 
       - task: CopyFiles@2
         inputs:
