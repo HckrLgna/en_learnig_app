@@ -45,13 +45,11 @@ jobs:
           echo App folder contents: $(ls $(Build.SourcesDirectory)/android/app)
         displayName: Copy keystore and key properties files
 
-      - task: FlutterBuild@0
-        displayName: Build flutter Android App
-        inputs:
-          target: "aab"
-          projectDirectory: "."
-          buildName: $(app_version_name)
-          buildNumber: $(app_version_code)
+      - script: |
+          flutter build appbundle --release --no-tree-shake-icons \
+          --build-name=$(app_version_name) \
+          --build-number=$(app_version_code)
+        displayName: "Build flutter Android App (AAB)"
 
       - task: CopyFiles@2
         inputs:
