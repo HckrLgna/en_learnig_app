@@ -65,7 +65,7 @@ jobs:
         displayName: Publish Android Artifact
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          artifactName: 'app'
+          artifactName: 'App'
           publishLocation: 'Container'
       - script: |
           echo "Workspace content:"
