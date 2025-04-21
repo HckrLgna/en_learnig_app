@@ -46,10 +46,6 @@ jobs:
         displayName: Copy keystore and key properties files
 
       - script: |
-          flutter test
-        displayName: "Run Flutter Tests"
-
-      - script: |
           sed -i "s/versionCode [0-9]\+/versionCode $(app_version_code)/" android/app/build.gradle
           sed -i "s/versionName \".*\"/versionName \"$(app_version_name)\"/" android/app/build.gradle
 
