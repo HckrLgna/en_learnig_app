@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Map<String, dynamic>> sendRequest(String query) async {
-  const String apiUrl = "https://backendcbatalk-production.up.railway.app/api/consulta";
+  const String apiUrl = "http://52.15.107.244/api/consulta";
   final Map<String, String> headers = {"Content-Type": "application/json"};
 
   final Map<String, String> body = {"consulta": query};
