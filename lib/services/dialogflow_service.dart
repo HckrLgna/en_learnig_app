@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<String> sendIntent(String query) async {
-  const String apiUrl = "https://proyecto-sw2.up.railway.app/api/dialogflow/detectIntent";
+  const String apiUrl = "http://52.15.107.244/api/dialogflow/detectIntent";
   final Map<String, String> headers = {"Content-Type": "application/json"};
 
   final Map<String, String> body = {"languageCode": "en", "queryText": query, "sessionId": "789464"};

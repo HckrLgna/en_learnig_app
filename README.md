@@ -1,16 +1,40 @@
 # en_learn
 
-A new Flutter project.
+[![Flutter Version](https://img.shields.io/badge/flutter-%3E%3D%203.10.5-blue)](https://flutter.dev/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-## Getting Started
+## Requisitos previos
 
-This project is a starting point for a Flutter application.
+- Flutter SDK (versión 3.10.5 o superior)
+- Android Studio o Visual Studio Code (opcional, para desarrollo)
+- Emulador o dispositivo físico para pruebas
 
-A few resources to get you started if this is your first Flutter project:
+## Instalación
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Sigue estos pasos para configurar el proyecto localmente:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/en_learn.git
+
+2. Navega al directorio del proyecto:
+    ```bash
+    cd en_learn
+3. Instala las dependencias del proyecto:
+    ```bash
+    flutter pub get
+4. Ejecuta la aplicacion en modo desarrollo:
+    ```bash
+    flutter run
+## Configuracion adicional
+1. Asegúrate de tener configurado un emulador o dispositivo físico conectado.
+2. Si necesitas agregar credenciales o configuraciones específicas, colócalas en el archivo assets/credentials.json.
+
+## Script útiles
+- Ejecutar pruebas
+    ```bash
+    flutter test
+- Construir aab:
+    ```bash
+    flutter build aab --release
+

@@ -113,7 +113,6 @@ class _PlacementTestState extends State<PlacementTest> {
                         const SizedBox(height: 40.0),
                         TextField(
                           maxLines: 6,
-
                           enabled: true,
                           controller: _textController,
                           onSubmitted: handleSubmitted,

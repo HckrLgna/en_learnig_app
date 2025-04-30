@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BackendProvider extends ChangeNotifier {
-  String baseUrl = 'proyecto-sw2.up.railway.app';
+  String baseUrl = '52.15.107.244';
 
   var modulo = 3;
   var resModulo = "";
@@ -33,7 +33,7 @@ class BackendProvider extends ChangeNotifier {
     final response = await http.post(url,
           body: json.encode(resData),
           headers: {'Content-Type': 'application/json; charset=UTF-8'});
-    var decodeResponse = json.decode(response.body);;
+    var decodeResponse = json.decode(response.body);
     try {
       print(response.body);
 
@@ -65,5 +65,7 @@ class BackendProvider extends ChangeNotifier {
     }
     
   }
+
+  
   
 }
